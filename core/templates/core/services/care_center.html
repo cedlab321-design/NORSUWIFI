@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}CARE Center - NORSU Bayawan{% endblock %}
+{% block content %}
+<style>
+    .reveal { opacity:0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.is-visible { opacity:1; transform: translateY(0); }
+</style>
+<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-700 text-white py-16">
+    <div class="absolute -left-16 -top-16 w-64 h-64 bg-emerald-400/25 blur-3xl rounded-full"></div>
+    <div class="absolute -right-24 top-10 w-72 h-72 bg-blue-400/25 blur-3xl rounded-full"></div>
+    <div class="max-w-5xl mx-auto px-6 lg:px-8 relative z-10 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm font-semibold reveal">
+            <i class="fas fa-hands-helping"></i>
+            <span>CARE Center</span>
+        </div>
+        <div class="space-y-3 reveal" style="transition-delay:120ms;">
+            <h1 class="text-4xl lg:text-5xl font-bold leading-tight">CARE Center</h1>
+            <p class="text-lg text-white/80 max-w-3xl">Counseling, wellness, and student assistance to support your mental and emotional well-being.</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-14 bg-white text-neutral-900">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8 space-y-6">
+        <div class="grid md:grid-cols-2 gap-6 reveal">
+            <div class="bg-white rounded-3xl border border-gray-100 shadow-lg p-6 space-y-4">
+                <h2 class="text-xl font-semibold flex items-center gap-2">
+                    <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-heart"></i></span>
+                    Support we offer
+                </h2>
+                <ul class="list-disc list-inside text-neutral-700 space-y-2">
+                    <li>Counseling and wellness sessions.</li>
+                    <li>Student assistance and referrals.</li>
+                    <li>Workshops on resilience and mental health.</li>
+                </ul>
+            </div>
+            <div class="bg-gradient-to-br from-emerald-50 to-white rounded-3xl border border-emerald-100 shadow-lg p-6 space-y-4">
+                <h2 class="text-xl font-semibold flex items-center gap-2">
+                    <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-comments"></i></span>
+                    Connect with us
+                </h2>
+                <div class="space-y-3 text-sm text-neutral-700">
+                    <p>Book a counseling slot, ask for assistance, or join wellness activities.</p>
+                    <a href="/contact/" class="inline-flex items-center gap-2 text-emerald-700 font-semibold hover:translate-x-1 transition">
+                        <span>Contact CARE Center</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'includes/footer.html' %}
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');obs.unobserve(e.target);}})},{threshold:.15,rootMargin:'0px 0px -10% 0px'});
+ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+});
+</script>
+{% endblock %}

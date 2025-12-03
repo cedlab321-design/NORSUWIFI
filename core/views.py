@@ -107,6 +107,49 @@ def organization(request):
     return render(request, 'core/organization.html', context)
 
 
+def services(request):
+    """Services page with quick navigation for student support units."""
+    services_list = [
+        {'slug': 'registrar', 'name': 'Registrar', 'icon': 'fa-file-alt', 'summary': 'Enrollment, records, and document requests.'},
+        {'slug': 'library', 'name': 'Library', 'icon': 'fa-book-open', 'summary': 'Research resources, borrowing, and study spaces.'},
+        {'slug': 'medical-dental', 'name': 'Medical and Dental', 'icon': 'fa-briefcase-medical', 'summary': 'On-campus medical and dental consultations.'},
+        {'slug': 'care-center', 'name': 'CARE Center', 'icon': 'fa-hands-helping', 'summary': 'Counseling, wellness, and student assistance.'},
+        {'slug': 'student-affairs', 'name': 'Student Affairs and Services', 'icon': 'fa-users', 'summary': 'Student engagement, discipline, and support programs.'},
+    ]
+    return render(request, 'core/services.html', {'services': services_list})
+
+
+def service_detail(request, slug):
+    """Render individual service pages."""
+    services_map = {
+        'registrar': {
+            'title': 'Registrar',
+            'template': 'core/services/registrar.html',
+        },
+        'library': {
+            'title': 'Library',
+            'template': 'core/services/library.html',
+        },
+        'medical-dental': {
+            'title': 'Medical and Dental',
+            'template': 'core/services/medical_dental.html',
+        },
+        'care-center': {
+            'title': 'CARE Center',
+            'template': 'core/services/care_center.html',
+        },
+        'student-affairs': {
+            'title': 'Student Affairs and Services',
+            'template': 'core/services/student_affairs.html',
+        },
+    }
+
+    svc = services_map.get(slug)
+    if not svc:
+        raise Http404("Service not found")
+    return render(request, svc['template'], {'title': svc['title']})
+
+
 def admissions(request):
     """Admissions information page."""
     context = {
