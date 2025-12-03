@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Student Management</h1>
+    {% if students %}
+        <ul class="space-y-3">
+            {% for s in students %}
+                <li class="p-4 bg-white rounded-lg shadow">{{ s }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">No students to manage. This is a placeholder.</p>
+    {% endif %}
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

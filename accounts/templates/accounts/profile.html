@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - {{ user_obj.get_full_name|default:user_obj.username }}{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    /* Page-specific styling for inputs */
+    .profile-card input[type="text"],
+    .profile-card input[type="email"],
+    .profile-card input[type="file"],
+    .profile-card select {
+        width: 100%;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        background: #fff;
+    }
+    .profile-card input:focus,
+    .profile-card select:focus {
+        outline: none;
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
+    }
+</style>
+
+<section class="bg-gradient-to-r from-blue-50 to-cyan-50 py-10">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <p class="text-sm uppercase font-semibold text-white/80 tracking-wide">Account</p>
+                    <h1 class="text-3xl font-bold">My Profile</h1>
+                    <p class="text-white/80">Manage your information and contact details</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="/accounts/logout/" class="inline-flex items-center px-4 py-2 rounded-xl bg-white/15 text-white font-semibold hover:bg-white/25 transition">
+                        <i class="fas fa-right-from-bracket mr-2"></i> Logout
+                    </a>
+                    <a href="/accounts/password_change/" class="inline-flex items-center px-4 py-2 rounded-xl bg-white text-blue-700 font-semibold shadow hover:-translate-y-0.5 transition transform">
+                        <i class="fas fa-key mr-2"></i> Change password
+                    </a>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8 profile-card">
+                <!-- Profile summary -->
+                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <div class="flex flex-col items-center text-center space-y-3">
+                        <div class="w-28 h-28 rounded-full overflow-hidden ring-4 ring-white shadow-lg">
+                            {% if profile and profile.avatar %}
+                                <img src="{{ profile.avatar.url }}" alt="{{ user_obj.username }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <img src="{% static 'images/default-avatar.svg' %}" alt="placeholder" class="w-full h-full object-cover">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold text-gray-900">{{ user_obj.get_full_name|default:user_obj.username }}</h2>
+                            <p class="text-sm text-gray-500">@{{ user_obj.username }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2 text-sm text-gray-700">
+                        <p class="flex items-center gap-2"><i class="fas fa-envelope text-blue-500 w-4"></i> {{ user_obj.email|default:'-' }}</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-id-card text-blue-500 w-4"></i> {{ profile.id_number|default:'-' }}</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-user text-blue-500 w-4"></i> {{ user_obj.userprofile.role|capfirst }}</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-phone text-blue-500 w-4"></i> {{ profile.phone|default:'-' }}</p>
+                        <p class="flex items-center gap-2"><i class="fas fa-building text-blue-500 w-4"></i> {{ profile.department|default:'-' }}</p>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="lg:col-span-2 bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+                    {% if messages %}
+                    <div class="space-y-2 mb-4">
+                        {% for message in messages %}
+                        <div class="p-3 rounded-xl bg-green-50 border border-green-100 text-sm text-green-800">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data" class="space-y-4">
+                        {% csrf_token %}
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-800 mb-1">Profile photo</label>
+                            {{ form.avatar }}
+                            {% if form.avatar.errors %}
+                                <p class="text-sm text-red-600 mt-1">{{ form.avatar.errors|join:", " }}</p>
+                            {% endif %}
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-800 mb-1">ID Number</label>
+                                {{ form.id_number }}
+                                {% if form.id_number.errors %}
+                                    <p class="text-sm text-red-600 mt-1">{{ form.id_number.errors|join:", " }}</p>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-800 mb-1">Phone</label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                    <p class="text-sm text-red-600 mt-1">{{ form.phone.errors|join:", " }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-800 mb-1">Department</label>
+                            {{ form.department }}
+                            {% if form.department.errors %}
+                                <p class="text-sm text-red-600 mt-1">{{ form.department.errors|join:", " }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="inline-flex items-center px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold shadow hover:shadow-lg transition">
+                                <i class="fas fa-save mr-2"></i> Save changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+
+{% endblock %}

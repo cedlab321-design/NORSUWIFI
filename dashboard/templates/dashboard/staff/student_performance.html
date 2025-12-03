@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Performance: {{ student.get_full_name|default:student.username }}</h1>
+    {% if submissions %}
+        <ul class="space-y-3">
+            {% for s in submissions %}
+            <li class="p-4 bg-white rounded shadow">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <div class="font-medium">{{ s.assignment.title }}</div>
+                        <div class="text-sm text-gray-500">Submitted: {{ s.submitted_at }}</div>
+                    </div>
+                    <div>
+                        {% if s.grade %}
+                            <div class="text-green-600 font-semibold">{{ s.grade.value }}</div>
+                        {% else %}
+                            <div class="text-gray-500">Not graded</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">No submissions found for this student.</p>
+    {% endif %}
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

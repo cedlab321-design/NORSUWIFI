@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Upload Document</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded">Upload</button>
+            <a href="{% url 'dashboard:documents_list' %}" class="ml-4 text-gray-600">Back</a>
+        </div>
+    </form>
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

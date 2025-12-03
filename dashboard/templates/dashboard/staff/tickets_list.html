@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Helpdesk Tickets</h1>
+    {% if tickets %}
+        <ul class="space-y-3">
+            {% for t in tickets %}
+            <li class="p-4 bg-white rounded shadow flex justify-between items-center">
+                <div>
+                    <a href="{% url 'dashboard:ticket_detail' pk=t.pk %}" class="font-medium text-blue-600">{{ t.title }}</a>
+                    <div class="text-sm text-gray-500">Created: {{ t.created_at }} by {{ t.created_by }}</div>
+                </div>
+                <div class="text-sm">{{ t.get_status_display }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">No tickets.</p>
+    {% endif %}
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

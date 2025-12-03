@@ -1,0 +1,526 @@
+<!-- templates/core/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section with Background Slideshow -->
+<section class="min-h-screen gradient-bg flex items-center relative overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <img src="{% static 'images/pic1.jpg' %}" alt="Campus view" class="hero-slide active" loading="lazy">
+        <img src="{% static 'images/bk.jpg' %}" alt="Students" class="hero-slide" loading="lazy">
+        <img src="{% static 'images/BK.png' %}" alt="Students" class="hero-slide" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center hero-content">
+        <div class="animate-fade-in">
+            <!-- Badge -->
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8 animate-slide-up">
+                <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                <span class="text-white/90 text-sm font-medium">Now Accepting Applications</span>
+            </div>
+            
+            <!-- Main Heading with Typewriter Effect -->
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                <span id="typewriter-element" class="gradient-text"></span>
+            </h1>
+            
+            <!-- Subtitle -->
+            <p class="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Negros Oriental State University – Santa Catalina Bayawan Campus: Building excellence through learning, leadership, and innovation.
+            </p>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                <a href="/contact/" class="group bg-white text-gray-900 px-8 py-4 rounded-2xl font-semibold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center space-x-2">
+                    <span>Start Your Journey</span>
+                    <span class="group-hover:translate-x-1 transition-transform"></span>
+                </a>
+                <a href="/about/" class="group border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:-translate-y-1">
+                    Learn More
+                </a>
+            </div>
+            
+            <!-- Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-white mb-2">50+</div>
+                <div class="text-white/70 text-sm">Courses</div>
+            </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-white mb-2">1000+</div>
+                    <div class="text-white/70 text-sm">Students</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-white mb-2">50+</div>
+                    <div class="text-white/70 text-sm">Faculty</div>
+                </div>
+            <div class="text-center">
+                <div class="text-3xl font-bold text-white mb-2">15+</div>
+                <div class="text-white/70 text-sm">Years</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce animate-slide-up" style="animation-delay: 1000ms;">
+        <div class="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+            <div class="w-1 h-3 bg-white rounded-full mt-2"></div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Latest News Section -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-slide-up">
+                Latest 
+                <span class="gradient-text">News</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 100ms;">
+                Stay updated with the latest happenings and announcements from NORSU Bayawan Campus.
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {% for news in latest_news %}
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-slide-up" style="animation-delay: {{ forloop.counter|add:1 }}00ms;">
+                <div class="h-48 overflow-hidden">
+                    {% if news.image %}
+                    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    {% else %}
+                    <img src="{% static 'images/news-placeholder.jpg' %}" alt="{{ news.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    {% endif %}
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center text-sm text-gray-500 mb-3">
+                        <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs font-medium">
+                            {{ news.published_date }}
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                        {{ news.title }}
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        {{ news.excerpt }}
+                    </p>
+                    {% comment %} Link to news detail: prefer `get_absolute_url`, fallback to named url using slug, otherwise link to news list. {% endcomment %}
+                    {% if news.get_absolute_url %}
+                    <a href="{{ news.get_absolute_url }}" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors duration-300">
+                        Read More
+                        <span class="ml-1 group-hover:translate-x-1 transition-transform duration-300">?+'</span>
+                    </a>
+                    {% elif news.slug %}
+                    <a href="{% url 'news:detail' news.slug %}" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors duration-300">
+                        Read More
+                        <span class="ml-1 group-hover:translate-x-1 transition-transform duration-300">?+'</span>
+                    </a>
+                    {% else %}
+                    <a href="/news/" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors duration-300">
+                        Read More
+                        <span class="ml-1 group-hover:translate-x-1 transition-transform duration-300">?+'</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="/news/" class="inline-flex items-center px-6 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-2xl hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                View All News
+                <span class="ml-2"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Upcoming Events Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-slide-up">
+                Upcoming 
+                <span class="gradient-text">Events</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 100ms;">
+                Join us for exciting events and activities happening around the campus.
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
+            {% for event in upcoming_events %}
+            <div class="group bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-slide-up" style="animation-delay: {{ forloop.counter|add:2 }}00ms;">
+                <div class="md:flex">
+                    <div class="md:flex-shrink-0 md:w-64">
+                        <div class="h-48 md:h-full overflow-hidden">
+                            {% if event.image %}
+                            <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            {% else %}
+                            <img src="{% static 'images/event-placeholder.jpg' %}" alt="{{ event.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="p-8 flex-1">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium">
+                                {{ event.date }}
+                            </span>
+                            <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium">
+                                {{ event.location }}
+                            </span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                            {{ event.title }}
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            {{ event.description }}
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <a href="#" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
+                                Learn More
+                                <span class="ml-1 group-hover:translate-x-1 transition-transform duration-300">?+'</span>
+                            </a>
+                            <span class="text-sm text-gray-500">Free Admission</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="/events/" class="inline-flex items-center px-6 py-3 border-2 border-orange-600 text-orange-600 font-semibold rounded-2xl hover:bg-orange-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                View All Events
+                <span class="ml-2"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-gray-900 to-primary-900 relative overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 animate-slide-up">
+            Ready to Begin Your
+            <span class="text-primary-300">Academic Journey?</span>
+        </h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 100ms;">
+            Join our community of learners and innovators. Your future starts here at NORSU Bayawan.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact/" class="bg-primary-500 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-primary-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl inline-flex items-center space-x-2 animate-slide-left" style="animation-delay: 200ms;">
+                <span>Apply Now</span>
+                <span></span>
+            </a>
+            <a href="/downloads/" class="border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:-translate-y-1 animate-slide-right" style="animation-delay: 300ms;">
+                Download Brochure
+            </a>
+        </div>
+    </div>
+</section>
+
+
+{% include 'includes/footer.html' %}
+
+<style>
+    /* Your existing styles remain exactly the same */
+    @keyframes slide-up {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-left {
+        0% {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slide-right {
+        0% {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-slide-left {
+        animation: slide-left 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-slide-right {
+        animation: slide-right 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.8s ease-out forwards;
+    }
+
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+
+    /* Hero background slideshow */
+    .hero-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+        filter: brightness(0.65) blur(4px);
+        transform: scale(1.05); /* slight scale to hide blur edges */
+    }
+
+    .hero-slide.active {
+        opacity: 1;
+    }
+
+    /* Gradient backgrounds */
+    .gradient-bg {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Simplified hero caption styles (carousel removed) */
+    .slide-caption {
+        position: relative;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: white;
+        background: rgba(0,0,0,0.25);
+        backdrop-filter: blur(6px);
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Responsive adjustments for overlay */
+    @media (max-width: 768px) {
+        .corner-overlay {
+            width: 200px;
+            height: 200px;
+            opacity: 0.1;
+        }
+        
+        .overlay-pattern {
+            opacity: 0.08;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .corner-overlay {
+            width: 150px;
+            height: 150px;
+            opacity: 0.08;
+        }
+    }
+
+    /* Typewriter cursor styles */
+    .typed-cursor {
+        color: #fbbf24;
+        font-weight: bold;
+        opacity: 1;
+        animation: typedjsBlink 0.7s infinite;
+    }
+    
+    @keyframes typedjsBlink {
+        50% { opacity: 0.0; }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-slide-up,
+        .animate-slide-left,
+        .animate-slide-right,
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-out forwards;
+            transform: none !important;
+        }
+        
+        .animate-pulse,
+        .animate-bounce {
+            animation: none;
+        }
+        
+        .typed-cursor {
+            animation: none;
+        }
+        
+        .slide {
+            transition: none;
+        }
+    }
+</style>
+
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script>
+    // Your existing JavaScript remains exactly the same
+    document.addEventListener('DOMContentLoaded', function() {
+        // Typewriter Animation
+        const typed = new Typed('#typewriter-element', {
+            strings: ['Our Pride', 'Our Hope', 'Our Future', 'Our Present'],
+            typeSpeed: 100,
+            backSpeed: 60,
+            backDelay: 2000,
+            startDelay: 500,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|'
+        });
+
+        // Background slideshow
+        const slides = Array.from(document.querySelectorAll('.hero-slide'));
+        let slideIndex = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        if (slides.length > 1) {
+            setInterval(() => {
+                slideIndex = (slideIndex + 1) % slides.length;
+                showSlide(slideIndex);
+            }, 3500);
+        }
+
+        // Carousel removed: no slideshow behavior
+
+        // Rest of your existing JavaScript...
+        const animatedElements = document.querySelectorAll('[class*="animate-"]');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const rect = element.getBoundingClientRect();
+                    const delay = Math.min(rect.top * 0.1, 600);
+                    
+                    setTimeout(() => {
+                        element.style.animationPlayState = 'running';
+                    }, delay);
+                    
+                    observer.unobserve(element);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        animatedElements.forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Add hover effects
+        const hoverCards = document.querySelectorAll('.group');
+        hoverCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Counter animation for stats
+        const counters = document.querySelectorAll('.text-3xl.font-bold');
+        const numberElements = Array.from(counters).filter(el => 
+            el.textContent.match(/\d+\+/)
+        );
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        numberElements.forEach(counter => counterObserver.observe(counter));
+
+        function animateCounter(element) {
+            const text = element.textContent;
+            const match = text.match(/(\d+)\+/);
+            if (!match) return;
+
+            const targetNumber = parseInt(match[1]);
+            const duration = 2000;
+            const frameDuration = 1000 / 60;
+            const totalFrames = Math.round(duration / frameDuration);
+            let frame = 0;
+
+            const counter = setInterval(() => {
+                frame++;
+                const progress = frame / totalFrames;
+                const currentNumber = Math.round(targetNumber * progress);
+
+                element.textContent = currentNumber + '+';
+
+                if (frame === totalFrames) {
+                    clearInterval(counter);
+                    element.textContent = targetNumber + '+';
+                }
+            }, frameDuration);
+        }
+    });
+</script>
+{% endblock %}

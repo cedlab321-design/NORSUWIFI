@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+
+{% block title %}Organization - NORSU Bayawan{% endblock %}
+
+{% block content %}
+<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-cyan-700 text-white">
+    <div class="absolute -left-24 -top-24 w-80 h-80 bg-cyan-400/30 rounded-full blur-3xl"></div>
+    <div class="absolute -right-32 top-10 w-96 h-96 bg-blue-500/25 rounded-full blur-3xl"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_45%)]"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 lg:py-20 relative z-10 space-y-12">
+        <!-- Hero -->
+        <div class="grid lg:grid-cols-[1.3fr,0.7fr] gap-10 items-center">
+            <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm font-semibold">
+                    <i class="fas fa-sitemap text-xs"></i>
+                    <span>Organization</span>
+                </div>
+                <div class="space-y-4">
+                    <h1 class="text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+                        People, programs, and support that shape future-ready leaders.
+                    </h1>
+                    <p class="text-lg text-white/80 max-w-3xl">
+                        See how our campus leadership, services, and student programs work together to cultivate excellence, integrity, and community impact.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#people" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-slate-900 font-semibold shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition">
+                        <i class="fas fa-users"></i>
+                        <span>Meet our people</span>
+                    </a>
+                    <a href="/contact/" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 text-white font-semibold border border-white/20 shadow hover:-translate-y-0.5 hover:shadow-lg transition">
+                        <i class="fas fa-headset"></i>
+                        <span>Contact us</span>
+                    </a>
+                </div>
+                <div class="inline-flex items-center gap-3 px-4 py-3 rounded-2xl bg-white/10 border border-white/20 shadow-sm">
+                    <span class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-500 text-white flex items-center justify-center text-xl shadow-inner">
+                        <i class="fas fa-network-wired"></i>
+                    </span>
+                    <div>
+                        <p class="text-sm font-semibold text-white">Leadership & services</p>
+                        <p class="text-sm text-white/80">Academic guidance, campus support, and student programs together.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="rounded-2xl border border-white/20 bg-white/10 backdrop-blur p-5 shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-wide text-cyan-200">Faculty</p>
+                    <h3 class="text-3xl font-bold text-white mt-1">{{ faculty_count }}</h3>
+                    <p class="text-sm text-white/70">Active members</p>
+                </div>
+                <div class="rounded-2xl border border-white/20 bg-white/10 backdrop-blur p-5 shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-wide text-emerald-200">Staff</p>
+                    <h3 class="text-3xl font-bold text-white mt-1">{{ staff_count }}</h3>
+                    <p class="text-sm text-white/70">Support & services</p>
+                </div>
+                <div class="rounded-2xl border border-white/20 bg-white/10 backdrop-blur p-5 shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-wide text-blue-200">Academic units</p>
+                    <h3 class="text-3xl font-bold text-white mt-1">{{ faculty_departments|length }}</h3>
+                    <p class="text-sm text-white/70">Departments</p>
+                </div>
+                <div class="rounded-2xl border border-white/20 bg-white/10 backdrop-blur p-5 shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-wide text-amber-200">Service units</p>
+                    <h3 class="text-3xl font-bold text-white mt-1">{{ staff_departments|length }}</h3>
+                    <p class="text-sm text-white/70">Support teams</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-white text-neutral-900">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 space-y-14">
+        <!-- Mission & Vision -->
+        <div class="grid lg:grid-cols-2 gap-6" id="mission">
+            <div class="relative overflow-hidden rounded-3xl border border-primary-100/70 bg-white shadow-2xl p-6 space-y-3">
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-primary-100/50 rounded-full blur-3xl opacity-70"></div>
+                <div class="relative z-10 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center text-lg"><i class="fas fa-bullseye"></i></span>
+                        <div>
+                            <p class="text-sm font-semibold uppercase tracking-wide text-primary-700">Mission</p>
+                            <h2 class="text-2xl font-bold text-neutral-900">Supportive and dynamic learning</h2>
+                        </div>
+                    </div>
+                    <p class="text-neutral-700 leading-relaxed">
+                        Our mission is to cultivate a supportive and dynamic learning environment that encourages academic excellence, personal growth, and responsible leadership. We empower students with opportunities that enhance skills, strengthen character, and inspire meaningful participation in school and community life.
+                    </p>
+                </div>
+            </div>
+            <div class="relative overflow-hidden rounded-3xl border border-emerald-100/70 bg-white shadow-2xl p-6 space-y-3">
+                <div class="absolute -left-8 -bottom-8 w-36 h-36 bg-emerald-100/60 rounded-full blur-3xl opacity-70"></div>
+                <div class="relative z-10 space-y-3">
+                    <div class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg"><i class="fas fa-eye"></i></span>
+                        <div>
+                            <p class="text-sm font-semibold uppercase tracking-wide text-emerald-700">Vision</p>
+                            <h2 class="text-2xl font-bold text-neutral-900">Globally recognized leadership</h2>
+                        </div>
+                    </div>
+                    <p class="text-neutral-700 leading-relaxed">
+                        A globally recognized state university developing future-ready graduates and compassionate leaders.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core values -->
+        <div class="space-y-4" id="values">
+            <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center text-lg"><i class="fas fa-heart"></i></span>
+                <div>
+                    <p class="text-sm font-semibold text-primary-700 uppercase tracking-wide">Core values</p>
+                    <h2 class="text-2xl font-bold text-neutral-900">How we lead and learn</h2>
+                </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="rounded-2xl border border-primary-100/70 bg-white p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2"><span class="w-10 h-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center"><i class="fas fa-star"></i></span><p class="text-lg font-bold text-neutral-900">Excellence</p></div>
+                    <p class="text-sm text-neutral-600">We strive for the highest standards in academics, behavior, and personal development.</p>
+                </div>
+                <div class="rounded-2xl border border-amber-100/70 bg-white p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2"><span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-user-tie"></i></span><p class="text-lg font-bold text-neutral-900">Leadership</p></div>
+                    <p class="text-sm text-neutral-600">We encourage students to become responsible, confident, and proactive leaders.</p>
+                </div>
+                <div class="rounded-2xl border border-emerald-100/70 bg-white p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2"><span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-handshake"></i></span><p class="text-lg font-bold text-neutral-900">Integrity</p></div>
+                    <p class="text-sm text-neutral-600">We uphold honesty, respect, and accountability in all actions and decisions.</p>
+                </div>
+                <div class="rounded-2xl border border-blue-100/70 bg-white p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2"><span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-people-arrows"></i></span><p class="text-lg font-bold text-neutral-900">Collaboration</p></div>
+                    <p class="text-sm text-neutral-600">We believe in teamwork and active engagement among students, teachers, and the school community.</p>
+                </div>
+                <div class="rounded-2xl border border-purple-100/70 bg-white p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2"><span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center"><i class="fas fa-universal-access"></i></span><p class="text-lg font-bold text-neutral-900">Inclusivity</p></div>
+                    <p class="text-sm text-neutral-600">We value diversity and ensure every student feels welcome, supported, and empowered.</p>
+                </div>
+                <div class="rounded-2xl border border-amber-100/70 bg-white p-5 shadow-sm">
+                    <div class="flex items-center gap-3 mb-2"><span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-hands-helping"></i></span><p class="text-lg font-bold text-neutral-900">Service</p></div>
+                    <p class="text-sm text-neutral-600">We promote a culture of giving back through community involvement and school initiatives.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Focus areas -->
+        <div class="space-y-4" id="focus-areas">
+            <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center text-lg"><i class="fas fa-bullseye"></i></span>
+                <div>
+                    <p class="text-sm font-semibold text-primary-700 uppercase tracking-wide">Focus areas</p>
+                    <h2 class="text-2xl font-bold text-neutral-900">Nurturing well-rounded students</h2>
+                </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="group relative overflow-hidden rounded-2xl border border-primary-100/80 bg-white p-5 shadow-sm">
+                    <div class="absolute right-2 top-2 w-16 h-16 bg-primary-100/60 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                    <div class="relative z-10 space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center"><i class="fas fa-book-open"></i></span>
+                            <div>
+                                <p class="text-sm font-semibold text-primary-700 uppercase tracking-wide">Academics</p>
+                                <h3 class="text-lg font-bold text-neutral-900">Continuous learning</h3>
+                            </div>
+                        </div>
+                        <ul class="text-sm text-neutral-600 space-y-1 list-disc list-inside">
+                            <li>Encouraging strong study habits.</li>
+                            <li>Supporting academic competitions and enhancement programs.</li>
+                            <li>Promoting a culture of continuous learning.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl border border-amber-100/80 bg-white p-5 shadow-sm">
+                    <div class="absolute right-2 top-2 w-16 h-16 bg-amber-100/70 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                    <div class="relative z-10 space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center"><i class="fas fa-basketball-ball"></i></span>
+                            <div>
+                                <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide">Sports & Physical Development</p>
+                                <h3 class="text-lg font-bold text-neutral-900">Teamwork and discipline</h3>
+                            </div>
+                        </div>
+                        <ul class="text-sm text-neutral-600 space-y-1 list-disc list-inside">
+                            <li>Building teamwork, discipline, and sportsmanship.</li>
+                            <li>Organizing athletic activities, competitions, and fitness programs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl border border-purple-100/80 bg-white p-5 shadow-sm">
+                    <div class="absolute right-2 top-2 w-16 h-16 bg-purple-100/70 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                    <div class="relative z-10 space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center"><i class="fas fa-theater-masks"></i></span>
+                            <div>
+                                <p class="text-sm font-semibold text-purple-700 uppercase tracking-wide">Culture & Arts</p>
+                                <h3 class="text-lg font-bold text-neutral-900">Creative expression</h3>
+                            </div>
+                        </div>
+                        <ul class="text-sm text-neutral-600 space-y-1 list-disc list-inside">
+                            <li>Promoting creativity through cultural events, performances, and clubs.</li>
+                            <li>Celebrating diversity and supporting student talents.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl border border-emerald-100/80 bg-white p-5 shadow-sm">
+                    <div class="absolute right-2 top-2 w-16 h-16 bg-emerald-100/70 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                    <div class="relative z-10 space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-hands-helping"></i></span>
+                            <div>
+                                <p class="text-sm font-semibold text-emerald-700 uppercase tracking-wide">Community Service</p>
+                                <h3 class="text-lg font-bold text-neutral-900">Responsible citizens</h3>
+                            </div>
+                        </div>
+                        <ul class="text-sm text-neutral-600 space-y-1 list-disc list-inside">
+                            <li>Conducting outreach programs and volunteer work.</li>
+                            <li>Developing responsible and compassionate citizens.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl border border-blue-100/80 bg-white p-5 shadow-sm">
+                    <div class="absolute right-2 top-2 w-16 h-16 bg-blue-100/70 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                    <div class="relative z-10 space-y-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center"><i class="fas fa-flag"></i></span>
+                            <div>
+                                <p class="text-sm font-semibold text-blue-700 uppercase tracking-wide">School Spirit & Events</p>
+                                <h3 class="text-lg font-bold text-neutral-900">Unity and pride</h3>
+                            </div>
+                        </div>
+                        <ul class="text-sm text-neutral-600 space-y-1 list-disc list-inside">
+                            <li>Organizing assemblies, celebrations, and student activities.</li>
+                            <li>Strengthening unity and school pride.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- People highlights -->
+        <div id="people" class="grid lg:grid-cols-[1.3fr,0.7fr] gap-8 items-start">
+            <div class="space-y-4">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div>
+                        <p class="text-sm font-semibold text-primary-700 uppercase tracking-wide">Academic leadership</p>
+                        <h2 class="text-2xl font-bold text-neutral-900">Faculty highlights</h2>
+                    </div>
+                    <a href="/academics/departments/" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-primary-50 text-primary-800 text-sm font-semibold border border-primary-100 hover:-translate-y-0.5 hover:shadow transition">
+                        <span>View departments</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {% if faculty_highlights %}
+                        {% for faculty in faculty_highlights %}
+                            <div class="group relative overflow-hidden rounded-2xl border border-primary-100/70 bg-white p-5 shadow-sm hover:-translate-y-1 hover:shadow-lg transition">
+                                <div class="absolute right-2 top-2 w-16 h-16 bg-primary-100/50 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                                <div class="relative z-10 space-y-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-11 h-11 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center font-bold">
+                                            {{ faculty.first_name|first|default:"F"|upper }}{{ faculty.last_name|first|default:""|upper }}
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-semibold text-primary-700">{{ faculty.position|default:"Faculty" }}</p>
+                                            <h3 class="text-lg font-bold text-neutral-900">{{ faculty.first_name }} {{ faculty.last_name }}</h3>
+                                            <p class="text-xs text-neutral-500">{{ faculty.department.name|default:"Department" }}</p>
+                                        </div>
+                                    </div>
+                                    {% if faculty.expertise %}
+                                        <p class="text-sm text-neutral-600 line-clamp-2"><span class="font-semibold text-neutral-900">Focus:</span> {{ faculty.expertise }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="rounded-2xl border border-dashed border-primary-200 bg-white p-6 text-neutral-700 shadow-sm sm:col-span-2 lg:col-span-3">
+                            Faculty highlights will appear here when profiles are added.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div>
+                        <p class="text-sm font-semibold text-amber-700 uppercase tracking-wide">Operations</p>
+                        <h2 class="text-2xl font-bold text-neutral-900">Staff highlights</h2>
+                    </div>
+                </div>
+                <div class="grid gap-4">
+                    {% if staff_highlights %}
+                        {% for staff in staff_highlights %}
+                            <div class="group relative overflow-hidden rounded-2xl border border-amber-100/70 bg-white p-5 shadow-sm hover:-translate-y-1 hover:shadow-lg transition">
+                                <div class="absolute right-2 top-2 w-16 h-16 bg-amber-100/60 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                                <div class="relative z-10 space-y-2">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
+                                            {{ staff.first_name|first|default:"S"|upper }}{{ staff.last_name|first|default:""|upper }}
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-semibold text-amber-700">{{ staff.get_position_display|default:staff.position }}</p>
+                                            <h3 class="text-lg font-bold text-neutral-900">{{ staff.first_name }} {{ staff.last_name }}</h3>
+                                            <p class="text-xs text-neutral-500">{{ staff.department.name|default:"Department" }}</p>
+                                        </div>
+                                    </div>
+                                    {% if staff.responsibilities %}
+                                        <p class="text-sm text-neutral-600 line-clamp-2"><span class="font-semibold text-neutral-900">Focus:</span> {{ staff.responsibilities }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="rounded-2xl border border-dashed border-amber-200 bg-white p-6 text-neutral-700 shadow-sm">
+                            Staff highlights will appear here when profiles are added.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Support units -->
+        <div class="grid lg:grid-cols-[1fr,0.8fr] gap-8 items-start">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg"><i class="fas fa-life-ring"></i></span>
+                    <div>
+                        <p class="text-sm font-semibold text-emerald-700 uppercase tracking-wide">Services & support</p>
+                        <h2 class="text-2xl font-bold text-neutral-900">Campus units at a glance</h2>
+                    </div>
+                </div>
+                <div class="grid gap-3 sm:grid-cols-2">
+                    {% if staff_departments %}
+                        {% for dept in staff_departments %}
+                            <div class="flex items-start gap-3 rounded-2xl border border-neutral-100 bg-white p-4 shadow-sm">
+                                <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i class="fas fa-people-group"></i></span>
+                                <div class="flex-1">
+                                    <p class="text-sm font-semibold text-neutral-900">{{ dept.name }}</p>
+                                    <p class="text-xs text-neutral-600 line-clamp-2">{{ dept.description|default:"Operations and student support services." }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="rounded-2xl border border-dashed border-emerald-200 bg-white p-4 text-sm text-neutral-700">
+                            Service units will appear here once added.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden rounded-3xl border border-primary-100/70 bg-white shadow-2xl p-6 space-y-4">
+                <div class="absolute -right-8 -top-8 w-32 h-32 bg-primary-100/50 rounded-full blur-3xl opacity-70"></div>
+                <div class="relative z-10 space-y-3">
+                    <p class="text-sm font-semibold uppercase tracking-wide text-primary-700">Get in touch</p>
+                    <h3 class="text-xl font-bold text-neutral-900">Need to connect with a team?</h3>
+                    <p class="text-sm text-neutral-600">We can route you to the right department for academics, services, or community programs.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="/contact/" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-semibold shadow hover:-translate-y-0.5 hover:shadow-lg transition">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact office</span>
+                        </a>
+                        <a href="tel:+63" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-primary-700 text-sm font-semibold border border-primary-100 shadow-sm hover:-translate-y-0.5 hover:shadow transition">
+                            <i class="fas fa-phone"></i>
+                            <span>Call</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+{% endblock %}

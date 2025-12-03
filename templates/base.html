@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NORSU Santa Catalina - Bayawan Campus{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        /* Simplified Ice Blue + Charcoal */
+                        primary: {
+                            50: '#effafe',
+                            100: '#e0f7ff',
+                            200: '#bfeeff',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#38BDF8',
+                            600: '#0ea5e9',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0b4a66'
+                        },
+                        accent: {
+                            50: '#f0f9ff',
+                            100: '#e6f9ff',
+                            200: '#c8f3ff',
+                            300: '#7dd3fc',
+                            400: '#67dffb',
+                            500: '#7DD3FC',
+                            600: '#47c4f9',
+                            700: '#2aa3d9',
+                            800: '#1b7fa8',
+                            900: '#155f82'
+                        },
+                        neutral: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1f2a37',
+                            900: '#0f1724'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'fade-in-left': 'fadeInLeft 0.8s ease-out',
+                        'fade-in-right': 'fadeInRight 0.8s ease-out',
+                        'typewriter': 'typewriter 3s steps(40) 1s both',
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite',
+                        'blink-caret': 'blinkCaret 0.75s step-end infinite',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        fadeInUp: {
+                            'from': { opacity: '0', transform: 'translateY(30px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInLeft: {
+                            'from': { opacity: '0', transform: 'translateX(-30px)' },
+                            'to': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        fadeInRight: {
+                            'from': { opacity: '0', transform: 'translateX(30px)' },
+                            'to': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        typewriter: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%, 100%': { 
+                                'text-shadow': '0 0 5px rgba(59, 130, 246, 0.5)',
+                                'box-shadow': '0 0 20px rgba(59, 130, 246, 0.3)'
+                            },
+                            '50%': { 
+                                'text-shadow': '0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6)',
+                                'box-shadow': '0 0 40px rgba(59, 130, 246, 0.6)'
+                            },
+                        },
+                        blinkCaret: {
+                            'from, to': { 'border-color': 'transparent' },
+                            '50%': { 'border-color': '#22d3ee' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Brand variables (simple, single-color styles) */
+        :root {
+            --brand-primary: #38BDF8; /* Ice Blue */
+            --brand-secondary: #0EA5E9; /* Cool Blue */
+            --brand-accent: #7DD3FC; /* Soft Sky Blue */
+            --brand-bg: #F1F5F9; /* Frost Gray */
+            --brand-text: #1E293B; /* Charcoal Blue */
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .gradient-bg {
+            /* simplified: single-color background using primary */
+            background-color: var(--brand-primary);
+        }
+        .gradient-text {
+            /* simplified: solid brand color for headings */
+            color: var(--brand-primary) !important;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: text;
+        }
+        .text-shadow {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        .hover-glow:hover {
+            text-shadow: 0 0 6px rgba(56, 189, 248, 0.18);
+            transition: text-shadow 0.18s ease;
+        }
+        /* Shared scroll-reveal helper for all pages */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+        .animate-stagger > * {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .animate-stagger > *:nth-child(1) { animation-delay: 0.1s; }
+        .animate-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+        .animate-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+        .animate-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+        .animate-stagger > *:nth-child(5) { animation-delay: 0.5s; }
+        .animate-stagger > *:nth-child(6) { animation-delay: 0.6s; }
+        
+        /* Article content styles */
+        .article-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .article-content.expanded {
+            max-height: 1000px;
+            transition: max-height 0.8s ease-in;
+        }
+
+        /* Navigation Styles */
+        .nav-transparent {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .nav-scrolled {
+            background: var(--brand-secondary) !important;
+            backdrop-filter: none !important;
+            border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06) !important;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--brand-accent);
+            transition: width 0.22s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-white-50">
+    <!-- Enhanced Navigation with Modern Design -->
+<nav class="fixed top-0 w-full z-50 transition-all duration-500 nav-transparent" id="mainNav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-6">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 bg-transparent rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20 group-hover:bg-white/10 transition-all duration-300">
+                    <!-- Image Logo -->
+                   <img src="/static/images/logo.jpg" alt="NORSU Bayawan Logo" class="w-9 h-9 object-contain object-center mx-auto rounded-full block">
+                </div>
+                <div>
+                    <span class="text-xl font-bold text-black drop-shadow-lg">NORSU Bayawan</span>
+                    <div class="text-xs text-blue-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Excellence in Education
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="/" class="nav-link text-black/150 hover:text-white text-sm font-medium drop-shadow-lg transition-all duration-300">
+                    Home
+                </a>
+                <a href="/about/" class="nav-link text-black/150 hover:text-white text-sm font-medium drop-shadow-lg transition-all duration-300">
+                    About
+                </a>
+                <a href="/academics/departments/" class="nav-link text-black/150 hover:text-white text-sm font-medium drop-shadow-lg transition-all duration-300">
+                    Academics
+                </a>
+                <a href="/organization/" class="nav-link text-black/150 hover:text-white text-sm font-medium drop-shadow-lg transition-all duration-300">
+                    Organization
+                </a>
+                <a href="/news/" class="nav-link text-black/150 hover:text-white text-sm font-medium drop-shadow-lg transition-all duration-300">
+                    News
+                </a>
+                <a href="/events/" class="nav-link text-black/150 hover:text-white text-sm font-medium drop-shadow-lg transition-all duration-300">
+                    Events
+                </a>
+                <a href="/contact/" class="nav-link text-black/150 hover:text-white text-sm font-medium drop-shadow-lg transition-all duration-300">
+                    Contact
+                </a>
+            </div>
+
+            <!-- User Section -->
+            <div class="flex items-center space-x-4">
+                {% if user.is_authenticated %}
+                    <!-- Profile Dropdown -->
+                    <div class="relative dropdown">
+                        <button class="flex items-center space-x-3 text-white/90 hover:text-white transition-all duration-300 group focus:outline-none">
+                            {% if user.userprofile.avatar %}
+                            <div class="w-9 h-9 rounded-full overflow-hidden border border-white/30 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                <img src="{{ user.userprofile.avatar.url }}" alt="{{ user.get_full_name|default:user.username }}" class="w-full h-full object-cover">
+                            </div>
+                            {% else %}
+                            <div class="w-9 h-9 bg-gradient-to-r from-blue-500 to-white-600 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg group-hover:shadow-xl transition-all duration-300">
+                                {{ user.username|first|upper }}
+                            </div>
+                            {% endif %}
+                            <div class="hidden md:block text-left">
+                                <div class="text-sm font-medium text-black drop-shadow-lg">
+                                    {{ user.get_full_name|default:user.username }}
+                                </div>
+                                <div class="text-xs text-blue-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    Administrator
+                                </div>
+                            </div>
+                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div class="dropdown-menu absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-2xl py-2 z-50 border border-gray-200/50">
+                            <div class="px-4 py-3 border-b border-gray-100">
+                                <p class="text-sm font-medium text-gray-900">{{ user.get_full_name|default:user.username }}</p>
+                                <p class="text-xs text-gray-500">{{ user.email }}</p>
+                            </div>
+                            <a href="/dashboard/" class="flex items-center space-x-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 group">
+                                <i class="fas fa-gauge text-gray-500 text-sm"></i>
+                                <span>Dashboard</span>
+                            </a>
+                            <a href="/profile/" class="flex items-center space-x-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 group">
+                                <i class="fas fa-user text-gray-500 text-sm"></i>
+                                <span>My Profile</span>
+                            </a>
+                            <a href="/settings/" class="flex items-center space-x-3 px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 group">
+                                <i class="fas fa-gear text-gray-500 text-sm"></i>
+                                <span>Settings</span>
+                            </a>
+                            <div class="border-t border-gray-100 my-1"></div>
+                            <a href="/accounts/logout/" class="flex items-center space-x-3 px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-all duration-200 group">
+                                <i class="fas fa-right-from-bracket text-red-500 text-sm"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Login Button -->
+                    <a href="/accounts/login/" class="bg-black/10 hover:bg-white/20 text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/30 hover:shadow-lg flex items-center space-x-2">
+                        <span>Login</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                        </svg>
+                    </a>
+                {% endif %}
+
+                <!-- Mobile Menu Button -->
+                <button class="lg:hidden w-10 h-10 flex items-center justify-center text-white/90 hover:text-white transition-colors duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <script>
+        // Enhanced scroll effect for navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('mainNav');
+            
+            if (window.scrollY > 50) {
+                nav.classList.remove('nav-transparent');
+                nav.classList.add('nav-scrolled');
+            } else {
+                nav.classList.remove('nav-scrolled');
+                nav.classList.add('nav-transparent');
+            }
+        });
+
+        // Initialize navigation state
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.add('nav-transparent');
+        });
+
+        // Mobile menu functionality (you can expand this)
+        document.querySelector('button.lg\\:hidden').addEventListener('click', function() {
+            // Add mobile menu toggle functionality here
+            console.log('Mobile menu clicked');
+        });
+
+        // Lightweight scroll-reveal applied across pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const targets = Array.from(document.querySelectorAll('section, .reveal-on-scroll'));
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+
+            targets.forEach((el, index) => {
+                if (el.dataset.noReveal === 'true') return;
+                if (!el.classList.contains('reveal-on-scroll')) {
+                    el.classList.add('reveal-on-scroll');
+                }
+                el.style.transitionDelay = `${Math.min(index * 80, 400)}ms`;
+                observer.observe(el);
+            });
+        });
+
+        // Back-to-top helper for shared footer button
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <!-- Rest of your HTML content remains the same -->
+    <main class="pt-20">
+        {% block content %}
+        <!-- Message flashes -->
+        {% if messages %}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+            {% for message in messages %}
+                <div class="mb-3 px-4 py-3 rounded {{ message.tags }} bg-white/90 shadow">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Your page content here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer and other sections remain the same -->
+</body>
+</html>

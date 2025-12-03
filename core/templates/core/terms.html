@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Terms of Service - NORSU Bayawan{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="bg-gradient-to-br from-indigo-900 via-blue-900 to-slate-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 right-10 w-48 h-48 bg-indigo-500 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-56 h-56 bg-blue-500 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-6 lg:px-10 py-16 lg:py-20">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6 animate-slide-up">
+            <i class="fas fa-scale-balanced text-cyan-300 mr-2"></i>
+            <span class="text-white/90 text-sm font-semibold">Clear & Fair Use</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 animate-slide-up" style="animation-delay:100ms;">
+            Terms of Service
+        </h1>
+        <p class="text-lg md:text-xl text-white/80 max-w-3xl animate-slide-up" style="animation-delay:200ms;">
+            Guidelines for using the NORSU Bayawan website, safeguarding both our community and our platform.
+        </p>
+        <div class="mt-6 text-sm text-white/70 animate-slide-up" style="animation-delay:300ms;">
+            Last updated: {% now "F d, Y" %}
+        </div>
+    </div>
+</section>
+
+<!-- Quick highlights -->
+<section class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-6 lg:px-10 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 shadow-sm animate-slide-up">
+            <div class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center mb-4">
+                <i class="fas fa-user-check"></i>
+            </div>
+            <h3 class="font-bold text-lg text-gray-900 mb-2">Acceptable Use</h3>
+            <p class="text-gray-600 text-sm">Use the site lawfully, respect others, and avoid harmful or disruptive behavior.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 shadow-sm animate-slide-up" style="animation-delay:120ms;">
+            <div class="w-12 h-12 rounded-xl bg-amber-500 text-white flex items-center justify-center mb-4">
+                <i class="fas fa-shield"></i>
+            </div>
+            <h3 class="font-bold text-lg text-gray-900 mb-2">Content Ownership</h3>
+            <p class="text-gray-600 text-sm">Site content is protected; you may not republish without permission unless otherwise stated.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 shadow-sm animate-slide-up" style="animation-delay:240ms;">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center mb-4">
+                <i class="fas fa-file-contract"></i>
+            </div>
+            <h3 class="font-bold text-lg text-gray-900 mb-2">Liability & Changes</h3>
+            <p class="text-gray-600 text-sm">Services are provided “as is.” We may update terms; continued use means acceptance.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Main terms -->
+<section class="py-14 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-6 lg:px-10 space-y-10">
+        <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 animate-slide-up">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Using Our Site</h2>
+            <ul class="space-y-3 text-gray-700">
+                <li><i class="fas fa-check text-blue-500 mr-2"></i>Do not misuse services, attempt unauthorized access, or disrupt availability.</li>
+                <li><i class="fas fa-check text-blue-500 mr-2"></i>Provide accurate information when submitting forms or applications.</li>
+                <li><i class="fas fa-check text-blue-500 mr-2"></i>Respect privacy; do not harvest or share others’ information without consent.</li>
+            </ul>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-6 animate-slide-up">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Intellectual Property</h3>
+                <p class="text-gray-700">Logos, marks, text, media, and code on this site belong to NORSU Bayawan unless noted. You may download materials for personal, non-commercial use with proper attribution.</p>
+            </div>
+            <div class="bg-white rounded-2xl shadow-md border border-gray-100 p-6 animate-slide-up" style="animation-delay:120ms;">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Third-Party Links</h3>
+                <p class="text-gray-700">External links are provided for convenience. We are not responsible for third-party content or policies. Review their terms when visiting.</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 animate-slide-up">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Disclaimers & Liability</h2>
+            <ul class="space-y-3 text-gray-700">
+                <li><i class="fas fa-info-circle text-amber-500 mr-2"></i>Services are provided “as is” without warranties of uninterrupted or error-free operation.</li>
+                <li><i class="fas fa-info-circle text-amber-500 mr-2"></i>We are not liable for indirect or consequential damages from site use.</li>
+                <li><i class="fas fa-info-circle text-amber-500 mr-2"></i>Some jurisdictions do not allow certain exclusions; your rights may vary.</li>
+            </ul>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 animate-slide-up">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Changes & Contact</h2>
+            <p class="text-gray-700 mb-3">We may update these terms to reflect policy or legal changes. We will post the updated date above; continued use after changes constitutes acceptance.</p>
+            <div class="flex flex-col sm:flex-row gap-4 text-sm">
+                <a href="/contact/" class="inline-flex items-center px-4 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold shadow hover:shadow-lg transition">
+                    <i class="fas fa-envelope mr-2"></i> Questions about these terms
+                </a>
+                <div class="px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-700">
+                    <div class="font-semibold text-gray-900">Email</div>
+                    <div class="text-gray-600">legal@norsu-bayawan.edu.ph</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+
+{% endblock %}

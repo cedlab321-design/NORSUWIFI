@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto py-12 px-6">
+    <h1 class="text-3xl font-bold mb-2">{{ course.title }}</h1>
+    <p class="text-gray-600 mb-4">{{ course.description }}</p>
+
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <p class="text-sm text-gray-500">Schedule: {{ course.schedule }}</p>
+            <p class="text-sm text-gray-500">Progress: {{ progress }}%</p>
+        </div>
+        <div>
+            {% if is_enrolled %}
+                <a href="{% url 'dashboard:student_leave_course' slug=course.slug %}" class="px-4 py-2 bg-red-600 text-white rounded">Leave</a>
+            {% else %}
+                <a href="{% url 'dashboard:student_join_course' slug=course.slug %}" class="px-4 py-2 bg-green-600 text-white rounded">Join</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <h2 class="text-xl font-semibold mb-3">Outline</h2>
+    <div class="prose max-w-none text-gray-700 mb-6">{{ course.outline|linebreaks }}</div>
+
+    <h2 class="text-xl font-semibold mb-3">Assignments</h2>
+    {% if assignments %}
+        <ul class="space-y-3">
+            {% for a in assignments %}
+            <li class="p-4 bg-white rounded-lg shadow flex justify-between items-center">
+                <div>
+                    <a href="{% url 'dashboard:assignment_detail' pk=a.pk %}" class="font-medium text-blue-600">{{ a.title }}</a>
+                    <div class="text-sm text-gray-500">Due: {{ a.due_date }}</div>
+                </div>
+                <div>
+                    <a href="{% url 'dashboard:submit_assignment' pk=a.pk %}" class="px-3 py-1 bg-blue-600 text-white rounded">Submit</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">No assignments yet.</p>
+    {% endif %}
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

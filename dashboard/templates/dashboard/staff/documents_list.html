@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Documents</h1>
+        <a href="{% url 'dashboard:document_upload' %}" class="px-3 py-2 bg-blue-600 text-white rounded">Upload</a>
+    </div>
+    {% if docs %}
+        <ul class="space-y-3">
+            {% for d in docs %}
+            <li class="p-4 bg-white rounded shadow flex justify-between items-center">
+                <div>
+                    <div class="font-medium">{{ d.title }}</div>
+                    <div class="text-sm text-gray-500">Uploaded: {{ d.uploaded_at }} by {{ d.uploaded_by }}</div>
+                </div>
+                <div>
+                    <a href="{{ d.file.url }}" class="text-blue-600">Download</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">No documents uploaded yet.</p>
+    {% endif %}
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-cyan-50 py-14 text-neutral-900">
+    <div class="absolute -left-24 -top-24 w-72 h-72 bg-primary-200/50 rounded-full blur-3xl"></div>
+    <div class="absolute -right-24 top-10 w-80 h-80 bg-cyan-200/50 rounded-full blur-3xl"></div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10 space-y-8">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
+                <a href="{% url 'dashboard:student_index' %}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-primary-100 text-primary-700 font-semibold text-sm shadow-sm hover:-translate-y-0.5 hover:shadow transition">
+                    <i class="fas fa-arrow-left text-xs"></i>
+                    <span>Back to student home</span>
+                </a>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-white shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-primary-600"></span>
+                    <span class="text-xs font-semibold tracking-wide text-primary-700 uppercase">Courses</span>
+                </div>
+            </div>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-primary-100 text-sm text-primary-700 shadow-sm">
+                <i class="fas fa-book-open text-primary-600"></i>
+                <span>Manage classes</span>
+            </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/80 bg-white/80 backdrop-blur p-5 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-wide text-primary-700">Enrolled</p>
+                <h3 class="text-2xl font-bold text-neutral-900 mt-1">{{ enrolled|length }}</h3>
+                <p class="text-sm text-neutral-500">Active courses</p>
+            </div>
+            <div class="rounded-2xl border border-white/80 bg-white/80 backdrop-blur p-5 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-wide text-amber-700">Open seats</p>
+                <h3 class="text-2xl font-bold text-neutral-900 mt-1">{{ available|length }}</h3>
+                <p class="text-sm text-neutral-500">Available courses</p>
+            </div>
+            <div class="rounded-2xl border border-white/80 bg-white/80 backdrop-blur p-5 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-wide text-emerald-700">Progress</p>
+                <div class="mt-2 flex items-center gap-3">
+                    <div class="flex-1 h-2 rounded-full bg-neutral-100 overflow-hidden">
+                        <div class="h-full w-2/3 bg-gradient-to-r from-primary-400 to-primary-600 animate-pulse"></div>
+                    </div>
+                    <span class="text-sm font-semibold text-neutral-600">In class</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-2">
+            <div class="relative overflow-hidden rounded-3xl border border-primary-100/70 bg-white/80 backdrop-blur p-6 shadow-md">
+                <div class="absolute right-4 -top-10 w-32 h-32 bg-primary-100/60 rounded-full blur-3xl opacity-70"></div>
+                <div class="flex items-start justify-between relative z-10">
+                    <div>
+                        <h2 class="text-xl font-bold text-neutral-900">Enrolled courses</h2>
+                        <p class="text-sm text-neutral-600 mt-1">Keep up with classes you are already in.</p>
+                    </div>
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-primary-50 text-primary-700 border border-primary-100">Enrolled</span>
+                </div>
+                <div class="mt-4 space-y-3 relative z-10">
+                    {% if enrolled %}
+                        {% for c in enrolled %}
+                            <div class="group rounded-2xl border border-primary-50 bg-white/90 p-4 shadow-sm hover:-translate-y-0.5 hover:shadow transition">
+                                <div class="flex items-start justify-between gap-3">
+                                    <div>
+                                        <a href="{{ c.get_absolute_url }}" class="text-lg font-semibold text-neutral-900 group-hover:text-primary-700 transition">{{ c.title }}</a>
+                                        <p class="text-sm text-neutral-500 mt-1">{{ c.schedule|default:"Schedule to be announced" }}</p>
+                                        {% if c.description %}
+                                            <p class="text-sm text-neutral-600 mt-2">{{ c.description|truncatewords:20 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <i class="fas fa-arrow-right text-primary-500 opacity-0 group-hover:opacity-100 transition"></i>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="rounded-2xl border border-dashed border-primary-200 bg-white/80 p-4 text-neutral-600 text-sm">
+                            You are not enrolled in any courses yet.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="relative overflow-hidden rounded-3xl border border-amber-100/70 bg-white/80 backdrop-blur p-6 shadow-md">
+                <div class="absolute right-4 -top-10 w-32 h-32 bg-amber-100/70 rounded-full blur-3xl opacity-70"></div>
+                <div class="flex items-start justify-between relative z-10">
+                    <div>
+                        <h2 class="text-xl font-bold text-neutral-900">Available courses</h2>
+                        <p class="text-sm text-neutral-600 mt-1">Browse open classes and join instantly.</p>
+                    </div>
+                    <span class="px-3 py-1 text-xs font-semibold rounded-full bg-amber-50 text-amber-700 border border-amber-100">Open</span>
+                </div>
+                <div class="mt-4 space-y-3 relative z-10">
+                    {% if available %}
+                        {% for c in available %}
+                            <div class="group rounded-2xl border border-amber-50 bg-white/90 p-4 shadow-sm hover:-translate-y-0.5 hover:shadow transition">
+                                <div class="flex items-start justify-between gap-3">
+                                    <div>
+                                        <a href="{{ c.get_absolute_url }}" class="text-lg font-semibold text-neutral-900 group-hover:text-amber-700 transition">{{ c.title }}</a>
+                                        <p class="text-sm text-neutral-500 mt-1">{{ c.schedule|default:"Schedule to be announced" }}</p>
+                                        {% if c.description %}
+                                            <p class="text-sm text-neutral-600 mt-2">{{ c.description|truncatewords:18 }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <a href="{% url 'dashboard:student_join_course' slug=c.slug %}" class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-500 text-white text-sm font-semibold shadow hover:-translate-y-0.5 hover:shadow-md transition">
+                                            <i class="fas fa-plus text-xs"></i>
+                                            <span>Join</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="rounded-2xl border border-dashed border-amber-200 bg-white/80 p-4 text-neutral-600 text-sm">
+                            No courses available right now. Check back soon.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

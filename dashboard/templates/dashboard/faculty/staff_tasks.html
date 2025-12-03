@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Staff Tasks</h1>
+    <form method="post" class="mb-6">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <button class="px-3 py-2 bg-blue-600 text-white rounded">Create Task</button>
+        </div>
+    </form>
+    {% if tasks %}
+        <ul class="space-y-3">
+            {% for t in tasks %}
+            <li class="p-4 bg-white rounded shadow">
+                <div class="font-medium">{{ t.title }} {% if t.completed %}<span class="text-sm text-green-600">(Done)</span>{% endif %}</div>
+                <div class="text-sm text-gray-500">Assigned to: {{ t.assigned_to }} — Due: {{ t.due_date }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">No tasks yet.</p>
+    {% endif %}
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

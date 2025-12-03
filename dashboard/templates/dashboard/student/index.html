@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<section class="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-cyan-50 py-14 text-neutral-900">
+    <div class="absolute -left-24 -top-24 w-72 h-72 bg-primary-200/50 rounded-full blur-3xl"></div>
+    <div class="absolute -right-24 top-10 w-80 h-80 bg-cyan-200/50 rounded-full blur-3xl"></div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <div class="grid gap-10 lg:grid-cols-[1.6fr,1fr] items-start">
+            <div class="space-y-6">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <a href="{% url 'dashboard:index' %}" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-primary-100 text-primary-700 font-semibold text-sm shadow-sm hover:-translate-y-0.5 hover:shadow transition">
+                        <i class="fas fa-arrow-left text-xs"></i>
+                        <span>Back to dashboard</span>
+                    </a>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 border border-white shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-primary-600"></span>
+                        <span class="text-xs font-semibold tracking-wide text-primary-700 uppercase">Student home</span>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <h1 class="text-4xl font-bold leading-tight tracking-tight text-neutral-900">
+                        My courses, assignments, and grades in one calm view.
+                    </h1>
+                    <p class="text-lg text-neutral-600 max-w-2xl">
+                        Pick up where you left off, manage what is due next, and stay close to your grades without hopping between pages.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="{% url 'dashboard:student_courses' %}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-600 text-white font-semibold shadow-md hover:-translate-y-0.5 hover:shadow-lg transition">
+                        <i class="fas fa-book"></i>
+                        <span>My Courses</span>
+                    </a>
+                    <a href="{% url 'dashboard:student_assignments' %}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-primary-700 font-semibold border border-primary-100 shadow-sm hover:-translate-y-0.5 hover:shadow transition">
+                        <i class="fas fa-tasks"></i>
+                        <span>Assignments</span>
+                    </a>
+                    <a href="{% url 'dashboard:student_grades' %}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900 text-white font-semibold shadow hover:-translate-y-0.5 hover:shadow-lg transition">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Grades</span>
+                    </a>
+                </div>
+
+                <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    <a href="{% url 'dashboard:student_courses' %}" class="group relative overflow-hidden rounded-2xl border border-primary-100/70 bg-white/80 backdrop-blur shadow hover:-translate-y-1 hover:shadow-lg transition p-5">
+                        <div class="absolute right-2 top-2 w-24 h-24 bg-primary-100/50 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                        <div class="flex items-start justify-between relative z-10">
+                            <div class="flex items-center gap-3">
+                                <span class="w-11 h-11 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center text-lg shadow-inner">
+                                    <i class="fas fa-book-open"></i>
+                                </span>
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-primary-700">My Courses</p>
+                                    <h3 class="text-lg font-bold text-neutral-900">Stay on track</h3>
+                                </div>
+                            </div>
+                            <span class="text-xs font-semibold text-primary-700 bg-primary-50 px-2.5 py-1 rounded-full">View</span>
+                        </div>
+                        <p class="relative z-10 mt-3 text-sm text-neutral-600">Browse enrolled classes, materials, and schedules in one place.</p>
+                        <div class="relative z-10 mt-4 flex items-center gap-3">
+                            <div class="flex-1 h-2 rounded-full bg-white/70 overflow-hidden">
+                                <div class="h-full w-2/3 bg-gradient-to-r from-primary-400 to-primary-600"></div>
+                            </div>
+                            <span class="text-xs font-semibold text-primary-700">Open</span>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'dashboard:student_assignments' %}" class="group relative overflow-hidden rounded-2xl border border-amber-100/70 bg-white/80 backdrop-blur shadow hover:-translate-y-1 hover:shadow-lg transition p-5">
+                        <div class="absolute right-2 top-2 w-24 h-24 bg-amber-100/60 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                        <div class="flex items-start justify-between relative z-10">
+                            <div class="flex items-center gap-3">
+                                <span class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg shadow-inner">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </span>
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-amber-700">Assignments</p>
+                                    <h3 class="text-lg font-bold text-neutral-900">Know what's due</h3>
+                                </div>
+                            </div>
+                            <span class="text-xs font-semibold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">Due soon</span>
+                        </div>
+                        <p class="relative z-10 mt-3 text-sm text-neutral-600">See deadlines, submit work, and track feedback without digging.</p>
+                        <div class="relative z-10 mt-4 flex items-center gap-3">
+                            <div class="flex-1 h-2 rounded-full bg-white/70 overflow-hidden">
+                                <div class="h-full w-1/2 bg-gradient-to-r from-amber-300 to-amber-500"></div>
+                            </div>
+                            <span class="text-xs font-semibold text-amber-700">Plan</span>
+                        </div>
+                    </a>
+
+                    <a href="{% url 'dashboard:student_grades' %}" class="group relative overflow-hidden rounded-2xl border border-emerald-100/70 bg-white/80 backdrop-blur shadow hover:-translate-y-1 hover:shadow-lg transition p-5">
+                        <div class="absolute right-2 top-2 w-24 h-24 bg-emerald-100/60 rounded-full blur-3xl opacity-70 group-hover:scale-110 transition"></div>
+                        <div class="flex items-start justify-between relative z-10">
+                            <div class="flex items-center gap-3">
+                                <span class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg shadow-inner">
+                                    <i class="fas fa-chart-pie"></i>
+                                </span>
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-emerald-700">Grades</p>
+                                    <h3 class="text-lg font-bold text-neutral-900">See progress</h3>
+                                </div>
+                            </div>
+                            <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Snapshot</span>
+                        </div>
+                        <p class="relative z-10 mt-3 text-sm text-neutral-600">Check course performance, averages, and instructor notes fast.</p>
+                        <div class="relative z-10 mt-4 flex items-center gap-3">
+                            <div class="flex-1 h-2 rounded-full bg-white/70 overflow-hidden">
+                                <div class="h-full w-1/3 bg-gradient-to-r from-emerald-300 to-emerald-500"></div>
+                            </div>
+                            <span class="text-xs font-semibold text-emerald-700">View</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="absolute -inset-4 bg-white/30 blur-3xl rounded-3xl"></div>
+                <div class="relative overflow-hidden rounded-3xl border border-white/70 bg-white/80 backdrop-blur-xl shadow-2xl p-6 space-y-6">
+                    <div class="absolute -right-12 -top-12 w-40 h-40 bg-gradient-to-bl from-primary-200 via-cyan-100 to-transparent rounded-full blur-2xl opacity-80"></div>
+                    <div class="absolute -left-10 bottom-0 w-32 h-32 bg-gradient-to-tr from-neutral-100 to-transparent rounded-full blur-2xl opacity-70"></div>
+
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-xs uppercase tracking-wide font-semibold text-primary-700">Upcoming</p>
+                            <h3 class="text-xl font-bold text-neutral-900">Next assignments</h3>
+                        </div>
+                        <a href="{% url 'dashboard:student_assignments' %}" class="text-sm font-semibold text-primary-700 hover:text-primary-800">View all</a>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between rounded-2xl border border-neutral-100 bg-neutral-50/80 p-4">
+                            <div class="flex items-center gap-3">
+                                <span class="w-11 h-11 rounded-xl bg-primary-100 text-primary-700 flex items-center justify-center text-lg">
+                                    <i class="fas fa-magic"></i>
+                                </span>
+                                <div>
+                                    <p class="text-sm font-semibold text-neutral-800">You're clear</p>
+                                    <p class="text-xs text-neutral-500">No upcoming assignments to show.</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-primary-50 text-primary-700">All caught up</span>
+                        </div>
+                        <div class="rounded-2xl border border-neutral-100 bg-white/80 p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <p class="text-sm font-semibold text-neutral-800">Stay ready</p>
+                                <span class="text-xs text-neutral-500">Heads up</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs text-neutral-500">
+                                <i class="fas fa-bell text-primary-600"></i>
+                                <span>Check this space for upcoming deadlines.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-neutral-100/80 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide font-semibold text-primary-700">Progress</p>
+                                <h3 class="text-xl font-bold text-neutral-900">Grades snapshot</h3>
+                            </div>
+                            <a href="{% url 'dashboard:student_grades' %}" class="text-sm font-semibold text-primary-700 hover:text-primary-800">See grades</a>
+                        </div>
+                        <div class="rounded-2xl border border-neutral-100 bg-neutral-50/80 p-4">
+                            <p class="text-sm text-neutral-600">Grades will appear here once available.</p>
+                            <div class="mt-4 flex items-center gap-3">
+                                <div class="flex-1 h-2 rounded-full bg-white overflow-hidden">
+                                    <div class="h-full w-1/3 bg-gradient-to-r from-primary-400 to-primary-600 animate-pulse"></div>
+                                </div>
+                                <span class="text-xs font-semibold text-neutral-500">Waiting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include 'includes/footer.html' %}
+{% endblock %}

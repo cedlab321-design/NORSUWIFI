@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Downloads - NORSU Bayawan{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-12">
+    <div class="bg-white rounded-lg shadow p-6">
+        <h1 class="text-2xl font-bold mb-4">Downloads</h1>
+        <p class="text-sm text-gray-600 mb-4">Files available for download from the site.</p>
+
+        {% if files %}
+        <ul class="space-y-3">
+            {% for f in files %}
+            <li class="p-3 border rounded flex items-center justify-between">
+                <div>
+                    <div class="font-medium">{{ f.name }}</div>
+                </div>
+                <div>
+                    <a href="{{ f.url }}" class="px-3 py-2 bg-primary-600 text-white rounded" download>Download</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-gray-600">No downloads are available right now.</p>
+        {% endif %}
+    </div>
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

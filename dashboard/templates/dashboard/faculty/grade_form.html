@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Grade Submission</h1>
+    <div class="mb-4">
+        <div class="font-medium">Assignment: {{ submission.assignment.title }}</div>
+        <div class="text-sm text-gray-500">Student: {{ submission.student.get_full_name|default:submission.student.username }}</div>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded">Save Grade</button>
+            <a href="{% url 'dashboard:faculty_grade_submissions_list' %}" class="ml-4 text-gray-600">Back</a>
+        </div>
+    </form>
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

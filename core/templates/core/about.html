@@ -1,0 +1,412 @@
+{% extends 'base.html' %}
+
+{% block title %}About - NORSU Bayawan{% endblock %}
+
+{% block content %}
+
+<style>
+        @keyframes slide-up {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide-left {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slide-right {
+            0% {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-slide-left {
+            animation: slide-left 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-slide-right {
+            animation: slide-right 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-out forwards;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .animate-slide-up,
+            .animate-slide-left,
+            .animate-slide-right,
+            .animate-fade-in {
+                animation: fade-in 0.8s ease-out forwards;
+                transform: none !important;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
+    </style>
+
+    <!-- Hero Section -->
+    <section class="pt-0 pb-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-300 text-white relative overflow-hidden" data-no-reveal="true">
+        <!-- Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-10 left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+            <div class="absolute top-40 right-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+            <div class="absolute bottom-20 left-20 w-72 h-72 bg-indigo-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-4000"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="animate-fade-in">
+                <!-- Badge -->
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
+                    <span class="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
+                    <span class="text-white/90 text-sm font-medium">About Our Institution</span>
+                </div>
+                
+                <!-- Main Heading -->
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    About 
+                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">NORSU Bayawan</span>
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Negros Oriental State University - Santa Catalina Bayawan Campus: 
+                    Shaping futures through quality education and community engagement.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- History Section -->
+    <section id="history" class="py-20 bg-gradient-to-b from-white to-blue-50" data-no-reveal="true">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-left">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-6">
+                        <i class="fas fa-scroll mr-2"></i> Our Legacy
+                    </div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Our History & Legacy</h2>
+                    <div class="space-y-4 text-gray-700 leading-relaxed">
+                        <p>
+                            The history of Negros Oriental State University (NORSU) in Bayawan dates back to its establishment as the Tolong Junior High School (TJHS) in 1947. The school was initially located in the heart of the Municipality of Bayawan, near Rizal Park and the Amphi-theater. It was later renamed TJHS and transferred to the Balabag site, where it became the Bayawan National High School and City Agriculturist Office. In 1950, it was converted into Negros Oriental Rural School (NORS) and later into Negros Oriental National Agricultural School (NONAS) in 1966. The school was eventually integrated into the Central Visayas Polytechnic College (CVPC) in 2000, which was later converted into NORSU in 2005.
+                        </p>
+                        
+                    </div>
+                </div>
+                
+                <div class="relative animate-slide-right">
+                    <!-- In the History Section -->
+                    <div class="bg-gradient-to-br from-blue-600 to-cyan-600 rounded-3xl p-8 shadow-2xl shadow-blue-500/20">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                            <img src="https://i.ytimg.com/vi/1HSizr7I7u4/maxresdefault.jpg" alt="NORSU Campus" class="rounded-xl w-full shadow-lg">
+                        </div>
+                    </div>
+                    <!-- Floating Stats -->
+                    <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-6 border border-blue-100 animate-slide-left" style="animation-delay: 400ms;">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-600 mb-1">15+</div>
+                            <div class="text-sm text-gray-600">Years of Excellence</div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-6 border border-blue-100 animate-slide-right" style="animation-delay: 600ms;">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-600 mb-1">1000+</div>
+                            <div class="text-sm text-gray-600">Graduates</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section id="principles" class="py-20 bg-white" data-no-reveal="true">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4 animate-slide-up">
+                    Our Guiding 
+                    <span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Principles</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 100ms;">
+                    The foundation of our commitment to excellence in education and community service.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Mission -->
+                <div class="group bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-blue-100 animate-slide-left" style="animation-delay: 200ms;">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-bullseye text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Mission</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Negros Oriental State University delivers global excellence through advanced instruction, impactful research, and sustainable extension, with strategic partnerships and modern infrastructure shaping effective leaders to serve the Philippine society and the world.
+                    </p>
+                </div>
+
+                <!-- Vision -->
+                <div class="group bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-indigo-100 animate-slide-right" style="animation-delay: 300ms;">
+                    <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-eye text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Vision</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A globally recognized state university.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section id="values" class="py-20 bg-gradient-to-br from-slate-50 to-blue-50" data-no-reveal="true">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4 animate-slide-up">
+                    Our Core 
+                    <span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Values</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 100ms;">
+                    The NORSU values that guide our actions and define our character as an institution.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="group text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100 animate-slide-left" style="animation-delay: 200ms;">
+                    <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-xl font-bold">S</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">Spirituality</h4>
+                </div>
+                
+                <div class="group text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-orange-100 animate-slide-up" style="animation-delay: 300ms;">
+                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-xl font-bold">H</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">Honesty</h4>
+                </div>
+                
+                <div class="group text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-green-100 animate-slide-up" style="animation-delay: 400ms;">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-xl font-bold">I</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">Innovation</h4>
+                </div>
+                
+                <div class="group text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-blue-100 animate-slide-up" style="animation-delay: 500ms;">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-xl font-bold">N</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">Nurturance</h4>
+                </div>
+                
+                <div class="group text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-purple-100 animate-slide-right" style="animation-delay: 600ms;">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-violet-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <span class="text-white text-xl font-bold">E</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-3 text-lg">Excellence</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section id="focus-areas" class="py-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white" data-no-reveal="true">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 text-center">
+                <p class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm font-semibold">Focus Areas</p>
+                <h3 class="mt-3 text-3xl font-bold">Key campus highlights</h3>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6 animate-slide-left" style="animation-delay: 200ms;">
+                    <div class="text-3xl md:text-4xl font-bold text-cyan-300 mb-2">50+</div>
+                    <div class="text-blue-200 font-medium">Academic Programs</div>
+                </div>
+                <div class="p-6 animate-slide-up" style="animation-delay: 300ms;">
+                    <div class="text-3xl md:text-4xl font-bold text-cyan-300 mb-2">1000+</div>
+                    <div class="text-blue-200 font-medium">Active Students</div>
+                </div>
+                <div class="p-6 animate-slide-up" style="animation-delay: 400ms;">
+                    <div class="text-3xl md:text-4xl font-bold text-cyan-300 mb-2">50+</div>
+                    <div class="text-blue-200 font-medium">Faculty Members</div>
+                </div>
+                <div class="p-6 animate-slide-right" style="animation-delay: 500ms;">
+                    <div class="text-3xl md:text-4xl font-bold text-cyan-300 mb-2">15+</div>
+                    <div class="text-blue-200 font-medium">Years of Service</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-white" data-no-reveal="true">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-3xl p-12 shadow-xl border border-blue-100 animate-slide-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    Ready to Join the 
+                    <span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">NORSU Family?</span>
+                </h2>
+                <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Become part of our growing community dedicated to academic excellence and personal growth.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/contact/" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-2xl font-semibold hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl inline-flex items-center space-x-2 animate-slide-left" style="animation-delay: 200ms;">
+                        <span>Contact Us</span>
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    <a href="/academics/departments/" class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-2xl font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1 animate-slide-right" style="animation-delay: 300ms;">
+                        View Programs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Trigger home-style animations on scroll for about page + counter animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // reveal animations
+            const animatedElements = document.querySelectorAll('[class*="animate-"]');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const rect = element.getBoundingClientRect();
+                        const delay = Math.min(rect.top * 0.1, 600);
+
+                        setTimeout(() => {
+                            element.style.animationPlayState = 'running';
+                        }, delay);
+
+                        revealObserver.unobserve(element);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                revealObserver.observe(el);
+            });
+
+            // Counter animation (mirrors home page)
+            const numberElements = Array.from(document.querySelectorAll('.text-3xl.font-bold, .text-4xl.font-bold')).filter(el =>
+                /\d+\+/.test(el.textContent)
+            );
+
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            numberElements.forEach(el => counterObserver.observe(el));
+
+            function animateCounter(element) {
+                const match = element.textContent.match(/(\d+)\+/);
+                if (!match) return;
+
+                const targetNumber = parseInt(match[1], 10);
+                const duration = 2000;
+                const frameDuration = 1000 / 60;
+                const totalFrames = Math.round(duration / frameDuration);
+                let frame = 0;
+
+                const counter = setInterval(() => {
+                    frame++;
+                    const progress = frame / totalFrames;
+                    const currentNumber = Math.round(targetNumber * progress);
+                    element.textContent = currentNumber + '+';
+
+                    if (frame === totalFrames) {
+                        clearInterval(counter);
+                        element.textContent = targetNumber + '+';
+                    }
+                }, frameDuration);
+            }
+
+            // Dropdown toggle for section jump
+            const dropdownBtn = document.getElementById('aboutDropdownBtn');
+            const dropdownMenu = document.getElementById('aboutDropdownMenu');
+            if (dropdownBtn && dropdownMenu) {
+                dropdownBtn.addEventListener('click', () => {
+                    dropdownMenu.classList.toggle('hidden');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!dropdownMenu.contains(e.target) && !dropdownBtn.contains(e.target)) {
+                        dropdownMenu.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {% include 'includes/footer.html' %}
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Submitted Assignments</h1>
+    {% if submissions %}
+        <ul class="space-y-3">
+            {% for s in submissions %}
+            <li class="p-4 bg-white rounded shadow flex justify-between items-center">
+                <div>
+                    <div class="font-medium">{{ s.assignment.title }} — {{ s.student.get_full_name|default:s.student.username }}</div>
+                    <div class="text-sm text-gray-500">Submitted: {{ s.submitted_at }}</div>
+                </div>
+                <div>
+                    <a href="{% url 'dashboard:faculty_grade_submission' submission_id=s.id %}" class="px-3 py-1 bg-blue-600 text-white rounded">Grade</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">No submissions.</p>
+    {% endif %}
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

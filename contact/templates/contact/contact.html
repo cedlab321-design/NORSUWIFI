@@ -1,0 +1,530 @@
+<!-- templates/contact/contact.html -->
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - NORSU Bayawan{% endblock %}
+
+{% block content %}
+
+<style>
+    @keyframes slide-up {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-left {
+        0% {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slide-right {
+        0% {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-slide-left {
+        animation: slide-left 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-slide-right {
+        animation: slide-right 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-fade-in {
+        animation: fade-in 0.8s ease-out forwards;
+    }
+
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-slide-up,
+        .animate-slide-left,
+        .animate-slide-right,
+        .animate-fade-in {
+            animation: fade-in 0.8s ease-out forwards;
+            transform: none !important;
+        }
+        
+        .animate-pulse {
+            animation: none;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="pt-0 pb-5 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0">
+        <div class="absolute top-10 left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="animate-fade-in">
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
+                <span class="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
+                <span class="text-white/90 text-sm font-medium">Get In Touch</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Contact 
+                <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Us</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Reach out to NORSU Bayawan Campus - we're here to help and answer any questions you may have.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12">
+            <!-- Contact Form -->
+            <div>
+                <div class="bg-white rounded-3xl shadow-lg p-8 border border-blue-100">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+                    
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-2xl mb-6 flex items-center">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white text-sm">✓</span>
+                        </div>
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    
+                    <form method="POST" class="space-y-6">
+                        {% csrf_token %}
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                {{ form.name }}
+                            </div>
+                            
+                            <div>
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            {{ form.subject }}
+                        </div>
+                        
+                        <div>
+                            {{ form.message }}
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 text-white py-4 px-6 rounded-2xl font-semibold hover:bg-green-500 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="space-y-8">
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 border border-blue-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <span class="text-white">📍</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Address</h4>
+                                <p class="text-gray-600 mt-1">Santa Catalina, Negros Oriental, Philippines</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-cyan-500 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <span class="text-white">📞</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Phone</h4>
+                                <p class="text-gray-600 mt-1">+63 XXX-XXXX-XXX</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <span class="text-white">✉️</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Email</h4>
+                                <p class="text-gray-600 mt-1">info@norsu-bayawan.edu.ph</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-purple-500 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <span class="text-white">🕒</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Office Hours</h4>
+                                <p class="text-gray-600 mt-1">Monday - Friday: 8:00 AM - 5:00 PM</p>
+                                <p class="text-gray-600">Saturday: 8:00 AM - 12:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Map Section -->
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8 border border-blue-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Location</h3>
+                    <div class="relative rounded-2xl overflow-hidden h-64 bg-gray-200">
+                        <div id="map-loading" class="absolute inset-0 flex items-center justify-center bg-gray-100">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse">
+                                    <span class="text-white text-2xl">📍</span>
+                                </div>
+                                <p class="text-gray-600 font-medium">Loading campus location...</p>
+                            </div>
+                        </div>
+                        <div id="map" class="w-full h-full"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-3 text-center">
+                        NORSU Bayawan Campus Location
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Contact -->
+<section class="py-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                Need Immediate
+                <span class="text-cyan-300">Assistance?</span>
+            </h2>
+            <p class="text-xl text-blue-200 mb-8 max-w-2xl mx-auto">
+                For urgent matters, feel free to call our administration office directly.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="tel:+63XXXXXXXXX" class="bg-cyan-500 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-cyan-400 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl inline-flex items-center space-x-2">
+                    <span>Call Now</span>
+                    <span>📞</span>
+                </a>
+                <a href="mailto:info@norsu-bayawan.edu.ph" class="border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 transform hover:-translate-y-1">
+                    Send Email
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Custom Footer Animations */
+    @keyframes float-slow {
+        0%, 100% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .footer-float {
+        animation: float-slow 6s ease-in-out infinite;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar for webkit browsers */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #1e293b;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #06b6d4, #3b82f6);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(to bottom, #0891b2, #2563eb);
+    }
+
+    /* Gradient text animation */
+    .gradient-text-animate {
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradient 15s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+</style>
+
+<script>
+    function loadSimpleMap() {
+        const mapContainer = document.getElementById('map');
+        const loading = document.getElementById('map-loading');
+        
+        // Google Maps embed using the provided link
+        mapContainer.innerHTML = `
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3931.234567890123!2d122.8347927!3d9.352466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x0!2zOcKwMjEnMDguOSJOIDEyMsKwNTAnMDUuMyJF!5e0!3m2!1sen!2sph!4v1234567890" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        `;
+        loading.style.display = 'none';
+    }
+
+    // Load map when page is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSimpleMap();
+    });
+</script>
+
+<!-- Enhanced Footer Section -->
+<footer class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%23ffffff\" fill-opacity=\"0.1\" fill-rule=\"evenodd\"/%3E%3C/svg%3E');"></div>
+    </div>
+
+    <!-- Floating Elements -->
+    <div class="absolute inset-0">
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-indigo-600 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse animation-delay-4000"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Main Footer Content -->
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8 lg:gap-12 mb-12">
+            <!-- Brand Section -->
+            <div class="lg:col-span-1">
+                <div class="flex items-center space-x-3 mb-6 group">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center backdrop-blur-sm border border-blue-400/30 group-hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-bold text-lg">N</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">NORSU Bayawan</h3>
+                        <p class="text-cyan-300 text-sm mt-1">Excellence in Education</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-6 text-sm">
+                    Providing quality, affordable, and relevant education that produces technologically competent 
+                    and environmentally conscious individuals for sustainable development.
+                </p>
+                <div class="flex items-center space-x-2 text-cyan-300">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <span class="text-sm font-medium">ISO Certified Institution</span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="lg:col-span-1">
+                <h4 class="text-lg font-bold mb-6 relative inline-block">
+                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Quick Links</span>
+                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+                </h4>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>About Us</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/academics/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Academics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admissions/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Admissions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/contact/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="lg:col-span-1">
+                <h4 class="text-lg font-bold mb-6 relative inline-block">
+                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Contact Info</span>
+                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+                </h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor" />
+                                <circle cx="12" cy="9" r="2.5" fill="#ffffff" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-gray-300 text-sm font-medium">Address</span>
+                            <p class="text-white text-sm">Bayawan City, Negros Oriental, Philippines</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57.12.34.04.73-.24 1.01l-2.21 2.21z" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-gray-300 text-sm font-medium">Phone</span>
+                            <p class="text-white text-sm">(035) 123-4567</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-gray-300 text-sm font-medium">Email</span>
+                            <p class="text-white text-sm">info@norsu-bayawan.edu.ph</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 1a11 11 0 100 22 11 11 0 000-22zm1 11V6h-2v6h6v-2h-4z" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-gray-300 text-sm font-medium">Office Hours</span>
+                            <p class="text-white text-sm">Mon - Fri: 8:00 AM - 5:00 PM</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            {% include 'includes/footer_connect.html' %}
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-blue-700/50 pt-8">
+            <div class="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
+                <!-- Copyright -->
+                <div class="text-center lg:text-left">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2024 <span class="text-cyan-300 font-semibold">NORSU Bayawan</span>. All rights reserved.
+                    </p>
+                </div>
+
+                <!-- Additional Links -->
+                <div class="flex flex-wrap justify-center lg:justify-end space-x-6 text-sm">
+                    <a href="/privacy/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Privacy Policy</a>
+                    <a href="/terms/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Terms of Service</a>
+                    <a href="/sitemap/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Sitemap</a>
+                    <a href="/accessibility/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Accessibility</a>
+                </div>
+            </div>
+
+            <!-- Accreditation Badges -->
+            <div class="flex justify-center items-center space-x-6 mt-6 pt-6 border-t border-blue-700/30">
+                <div class="text-center group">
+                    <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-award text-white text-sm"></i>
+                    </div>
+                    <span class="text-gray-400 text-xs">CHED Recognized</span>
+                </div>
+                <div class="text-center group">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-star text-white text-sm"></i>
+                    </div>
+                    <span class="text-gray-400 text-xs">ISO 9001:2015</span>
+                </div>
+                <div class="text-center group">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-shield-alt text-white text-sm"></i>
+                    </div>
+                    <span class="text-gray-400 text-xs">Quality Assured</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 z-50 border border-cyan-400/30 backdrop-blur-sm">
+        <i class="fas fa-chevron-up text-sm"></i>
+    </button>
+</footer>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Materials for {{ course.title }}</h1>
+
+    <div class="mb-6">
+        <h2 class="text-lg font-semibold mb-2">Upload Assignment / Material</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <button class="px-3 py-2 bg-blue-600 text-white rounded">Upload</button>
+            </div>
+        </form>
+    </div>
+
+    <h2 class="text-lg font-semibold mb-3">Assignments & Materials</h2>
+    {% if assignments %}
+        <ul class="space-y-3">
+            {% for a in assignments %}
+            <li class="p-4 bg-white rounded shadow">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <div class="font-medium">{{ a.title }}</div>
+                        <div class="text-sm text-gray-500">Due: {{ a.due_date }}</div>
+                    </div>
+                    <div>
+                        {% if a.attachment %}
+                            <a href="{{ a.attachment.url }}" class="text-blue-600">Download</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">No assignments yet.</p>
+    {% endif %}
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

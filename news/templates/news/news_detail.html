@@ -1,0 +1,259 @@
+<!-- templates/news/news_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ news_post.title }} - NORSU Bayawan{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-800 to-purple-700 text-white py-20 relative overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0">
+        <div class="absolute top-10 left-10 w-48 h-48 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+        <div class="absolute top-20 right-10 w-64 h-64 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-2000"></div>
+        <div class="absolute bottom-10 left-20 w-56 h-56 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse animation-delay-4000"></div>
+    </div>
+    
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <!-- Category Badge -->
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 mb-8">
+            <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+            <span class="text-white/90 text-sm font-medium">Campus News</span>
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            {{ news_post.title }}
+        </h1>
+        
+        <p class="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed mb-8">
+            {{ news_post.excerpt }}
+        </p>
+        
+        <!-- Meta Information -->
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-6 text-blue-200">
+            <div class="flex items-center">
+                <span class="mr-2">📅</span>
+                <span>{{ news_post.published_date|date:"F d, Y" }}</span>
+            </div>
+            <div class="hidden sm:block">•</div>
+            <div class="flex items-center">
+                <span class="mr-2">👤</span>
+                <span>By {{ news_post.author.get_full_name|default:news_post.author.username }}</span>
+            </div>
+            <div class="hidden sm:block">•</div>
+            <div class="flex items-center">
+                <span class="mr-2">🏷️</span>
+                <span>{{ news_post.get_category_display }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Article Content -->
+<article class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <!-- Featured Image -->
+    <div class="mb-12 rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+        {% if news_post.image %}
+        <img src="{{ news_post.image.url }}" alt="{{ news_post.title }}" 
+             class="w-full h-64 md:h-96 object-cover">
+        {% else %}
+        <div class="w-full h-64 md:h-96 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+            <span class="text-white text-6xl">📰</span>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none">
+        <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100/50">
+            <div class="text-gray-700 leading-relaxed text-lg space-y-8">
+                {{ news_post.content|linebreaks }}
+            </div>
+            
+            <!-- Featured Badge -->
+            {% if news_post.is_featured %}
+            <div class="mt-8 pt-8 border-t border-gray-200/60">
+                <span class="inline-flex items-center px-4 py-2 rounded-full bg-yellow-100 text-yellow-800 text-sm font-semibold">
+                    <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2 animate-pulse"></span>
+                    Featured Story
+                </span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+        <!-- Back to News -->
+        <a href="{% url 'news:list' %}" 
+           class="group inline-flex items-center space-x-3 text-blue-700 hover:text-green-600 font-semibold transition-all duration-300">
+            <span class="transform group-hover:-translate-x-2 transition-transform duration-300">←</span>
+            <span class="border-b-2 border-transparent group-hover:border-blue-600 transition-all duration-300">
+                Back to All News
+            </span>
+        </a>
+        
+        <!-- Share Buttons -->
+        <div class="flex items-center space-x-4">
+            <span class="text-gray-600 text-sm">Share this article:</span>
+            <div class="flex space-x-2">
+                <button class="p-2 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 transition-colors duration-300">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </button>
+                <button class="p-2 rounded-full bg-blue-400 text-white hover:bg-blue-500 transition-colors duration-300">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.016 10.016 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63a9.936 9.936 0 002.46-2.543l-.047-.02z"/>
+                    </svg>
+                </button>
+                <button class="p-2 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-colors duration-300">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- Related News Section -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                More <span class="gradient-text">News</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Explore other recent stories from NORSU Bayawan
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- You can add related news articles here -->
+            <div class="text-center py-12 col-span-3">
+                <div class="max-w-md mx-auto">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">More Stories Coming Soon</h3>
+                    <p class="text-gray-600">Check back for more exciting news from our campus.</p>
+                    <a href="{% url 'news:list' %}" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold mt-4">
+                        View All News
+                        <span class="ml-1">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes slide-up {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .prose {
+        line-height: 1.8;
+    }
+    
+    .prose p {
+        margin-bottom: 1.5em;
+        font-size: 1.125rem;
+    }
+    
+    .prose p:first-of-type {
+        font-size: 1.25rem;
+        color: #374151;
+        font-weight: 500;
+        line-height: 1.7;
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-slide-up {
+            animation: none;
+            opacity: 1;
+            transform: none;
+        }
+        
+        .animate-pulse {
+            animation: none;
+        }
+    }
+</style>
+
+<script>
+    // Initialize animations when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add scroll-triggered animations
+        const animatedElements = document.querySelectorAll('.animate-slide-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const rect = element.getBoundingClientRect();
+                    const delay = Math.min(rect.top * 0.1, 600);
+                    
+                    setTimeout(() => {
+                        element.style.animationPlayState = 'running';
+                    }, delay);
+                    
+                    observer.unobserve(element);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        animatedElements.forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Add share functionality
+        const shareButtons = document.querySelectorAll('button');
+        shareButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const title = "{{ news_post.title }}";
+                const url = window.location.href;
+                
+                if (this.querySelector('svg path[d*="facebook"]')) {
+                    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+                } else if (this.querySelector('svg path[d*="twitter"]')) {
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`, '_blank');
+                } else if (this.querySelector('svg path[d*="linkedin"]')) {
+                    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

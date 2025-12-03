@@ -1,0 +1,38 @@
+<!-- templates/news/news_popup.html -->
+<div class="flex flex-col md:flex-row max-h-[90vh]">
+    <!-- Image Section -->
+    <div class="md:w-2/5">
+        <img src="{{ news_post.image.url }}" alt="{{ news_post.title }}" 
+             class="w-full h-64 md:h-full object-cover">
+    </div>
+    
+    <!-- Content Section -->
+    <div class="md:w-3/5 p-6 md:p-8 overflow-y-auto">
+        <button onclick="closePopup()" 
+                class="absolute top-4 right-4 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors">
+            ✕
+        </button>
+        
+        <div class="flex items-center text-sm text-gray-500 mb-4">
+            <span class="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">NEWS</span>
+            <span class="mx-3">•</span>
+            <span>{{ news_post.published_date|date:"F d, Y" }}</span>
+            <span class="mx-3">•</span>
+            <span>By {{ news_post.author.get_full_name|default:news_post.author.username }}</span>
+        </div>
+        
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{{ news_post.title }}</h2>
+        
+        <div class="prose prose-lg max-w-none text-gray-700">
+            {{ news_post.content|linebreaks }}
+        </div>
+        
+        <div class="mt-6 pt-6 border-t border-gray-200">
+            <a href="{% url 'news:detail' news_post.slug %}" 
+               class="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                <span>View Full Article</span>
+                <span>→</span>
+            </a>
+        </div>
+    </div>
+</div>

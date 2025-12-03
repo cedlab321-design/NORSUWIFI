@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <h1 class="text-3xl font-bold mb-4">Staff Dashboard</h1>
+    <p class="text-gray-600 mb-6">This is a placeholder staff dashboard. Only staff users can access this.</p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <a href="{% url 'dashboard:staff_student_management' %}" class="p-6 bg-white rounded-xl shadow hover:shadow-lg">
+            <h3 class="font-semibold">Student Management</h3>
+            <p class="text-sm text-gray-500">Manage student records and enrollments</p>
+        </a>
+        <a href="{% url 'dashboard:staff_support_tools' %}" class="p-6 bg-white rounded-xl shadow hover:shadow-lg">
+            <h3 class="font-semibold">Support Tools</h3>
+            <p class="text-sm text-gray-500">Tools for administrative support</p>
+        </a>
+    </div>
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

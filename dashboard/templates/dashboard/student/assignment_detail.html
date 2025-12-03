@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">{{ assignment.title }}</h1>
+    <p class="text-gray-600 mb-4">{{ assignment.description }}</p>
+    {% if assignment.attachment %}
+        <p class="mb-4">Attachment: <a href="{{ assignment.attachment.url }}" class="text-blue-600">Download</a></p>
+    {% endif %}
+
+    <h3 class="text-lg font-semibold mb-2">Your Submissions</h3>
+    {% if submissions %}
+        <ul class="space-y-3">
+            {% for s in submissions %}
+                <li class="p-4 bg-white rounded shadow">
+                    <div class="text-sm text-gray-500">Submitted: {{ s.submitted_at }}</div>
+                    <div class="mt-2">
+                        {% if s.file %}
+                            <a href="{{ s.file.url }}" class="text-blue-600">Download submission</a>
+                        {% endif %}
+                        <p class="text-gray-700 mt-2">{{ s.text }}</p>
+                    </div>
+                    {% if s.grade %}
+                        <div class="mt-3 p-3 bg-green-50 rounded">
+                            <div class="text-sm font-semibold">Grade: {{ s.grade.value }}</div>
+                            <p class="text-sm text-gray-700">{{ s.grade.feedback }}</p>
+                        </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600">You have not submitted anything yet.</p>
+    {% endif %}
+
+    <div class="mt-6">
+        <a href="{% url 'dashboard:submit_assignment' pk=assignment.pk %}" class="px-4 py-2 bg-blue-600 text-white rounded">Submit Assignment</a>
+    </div>
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

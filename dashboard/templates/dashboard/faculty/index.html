@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto py-12 px-6">
+    <h1 class="text-3xl font-bold mb-4">Faculty Dashboard</h1>
+    <p class="text-gray-600 mb-6">This is a placeholder faculty dashboard. Access limited to faculty/staff accounts.</p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <a href="{% url 'dashboard:faculty_course_builder' %}" class="p-6 bg-white rounded-xl shadow hover:shadow-lg">
+            <h3 class="font-semibold">Course Builder</h3>
+            <p class="text-sm text-gray-500">Create and manage courses</p>
+        </a>
+        <a href="{% url 'dashboard:faculty_grade_submissions' %}" class="p-6 bg-white rounded-xl shadow hover:shadow-lg">
+            <h3 class="font-semibold">Grade Submissions</h3>
+            <p class="text-sm text-gray-500">Submit and review student grades</p>
+        </a>
+        <a href="{% url 'dashboard:faculty_staff_coordination' %}" class="p-6 bg-white rounded-xl shadow hover:shadow-lg">
+            <h3 class="font-semibold">Staff Coordination</h3>
+            <p class="text-sm text-gray-500">Coordinate with staff and peers</p>
+        </a>
+    </div>
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

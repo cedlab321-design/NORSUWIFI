@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-6">
+    <h1 class="text-2xl font-bold mb-4">Ticket: {{ ticket.title }}</h1>
+    <p class="text-gray-700">{{ ticket.description }}</p>
+    <p class="text-sm text-gray-500">Created: {{ ticket.created_at }} by {{ ticket.created_by }}</p>
+
+    <form method="post" class="mt-6">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded">Save</button>
+            <a href="{% url 'dashboard:tickets_list' %}" class="ml-4 text-gray-600">Back</a>
+        </div>
+    </form>
+</div>
+{% include 'includes/footer_connect.html' %}
+{% endblock %}

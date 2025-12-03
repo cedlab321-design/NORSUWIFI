@@ -1,0 +1,439 @@
+<!-- templates/news/news_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}News - NORSU Bayawan{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-blue-700 text-white py-16">
+    <div class="max-w-7xl mx-auto px-6">
+        <h1 class="text-4xl font-bold mb-4">Campus News</h1>
+        <p class="text-xl">Stay updated with the latest happenings at NORSU Bayawan</p>
+    </div>
+</section>
+
+<!-- News Grid -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for news in news_posts %}
+            <article class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2">
+                <div class="overflow-hidden">
+                    <img src="{{ news.image.url }}" alt="{{ news.title }}" 
+                         class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center text-sm text-gray-500 mb-3">
+                        <span>{{ news.published_date|date:"M d, Y" }}</span>
+                        <span class="mx-2">•</span>
+                        <span>By {{ news.author.get_full_name|default:news.author.username }}</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                        {{ news.title }}
+                    </h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3">{{ news.excerpt }}</p>
+                    
+                    <!-- Read More Button with Popup -->
+                    <button onclick="openPopup('popup{{ forloop.counter }}')" 
+                            class="inline-flex items-center space-x-2 text-blue-700 hover:text-green-600 font-semibold group/readmore transition-all duration-500 relative pb-1">
+                        <span>Read More</span>
+                        <span class="transform group-hover/readmore:translate-x-2 transition-transform duration-300">→</span>
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover/readmore:w-full transition-all duration-500"></span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Hidden Popup Content -->
+            <div id="popup{{ forloop.counter }}" class="hidden">
+                <div class="p-8 max-h-[85vh] overflow-y-auto">
+                    <!-- Close Button -->
+                    <button onclick="closePopup()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors p-2 rounded-full hover:bg-gray-100 z-10">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Article Image -->
+                    <div class="mb-6 -mx-8 -mt-8">
+                        <img src="{{ news.image.url }}" alt="{{ news.title }}" 
+                             class="w-full h-64 object-cover">
+                    </div>
+
+                    <!-- Article Header -->
+                    <div class="mb-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <span>{{ news.published_date|date:"M d, Y" }}</span>
+                            <span class="mx-2">•</span>
+                            <span>By {{ news.author.get_full_name|default:news.author.username }}</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ news.title }}</h2>
+                    </div>
+
+                    <!-- Article Content -->
+                    <div class="prose max-w-none text-gray-700">
+                        {{ news.content|linebreaks }}
+                        
+                        <!-- Sample content if news.content is not available -->
+                        {% if not news.content %}
+                        <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p class="mb-4">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p class="mb-6">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-4 mt-8 pt-6 border-t border-gray-200">
+                        <button onclick="closePopup()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                            Close Article
+                        </button>
+                        <button class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
+                            Share Article
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-3 text-center py-12">
+                <p class="text-gray-500 text-lg">No news articles available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="flex justify-center mt-12">
+            <div class="flex space-x-2">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    Previous
+                </a>
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <span class="px-4 py-2 bg-blue-600 text-white rounded-lg">{{ num }}</span>
+                {% else %}
+                <a href="?page={{ num }}" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    {{ num }}
+                </a>
+                {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    Next
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Popup Overlay -->
+<div id="popupOverlay" class="fixed inset-0 bg-black/50 z-50 hidden backdrop-blur-sm">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div id="popupContainer" class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform scale-95 opacity-0 transition-all duration-300 relative">
+            <!-- Popup content will be injected here -->
+        </div>
+    </div>
+</div>
+
+<style>
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .popup-open {
+        animation: popupOpen 0.3s ease-out forwards;
+    }
+    
+    .popup-close {
+        animation: popupClose 0.2s ease-in forwards;
+    }
+    
+    @keyframes popupOpen {
+        0% {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes popupClose {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+    }
+
+    /* Custom scrollbar for popup */
+    #popupContainer::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    #popupContainer::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    #popupContainer::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 10px;
+    }
+    
+    #popupContainer::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+</style>
+
+<script>
+    function openPopup(popupId) {
+        const overlay = document.getElementById('popupOverlay');
+        const popupContainer = document.getElementById('popupContainer');
+        const popupContent = document.getElementById(popupId);
+        
+        // Load content into popup container
+        popupContainer.innerHTML = popupContent.innerHTML;
+        
+        // Show overlay and start animation
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+        setTimeout(() => {
+            popupContainer.classList.remove('scale-95', 'opacity-0');
+            popupContainer.classList.add('popup-open');
+        }, 10);
+    }
+    
+    function closePopup() {
+        const overlay = document.getElementById('popupOverlay');
+        const popupContainer = document.getElementById('popupContainer');
+        
+        popupContainer.classList.remove('popup-open');
+        popupContainer.classList.add('popup-close');
+        
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+            popupContainer.classList.remove('popup-close');
+            popupContainer.classList.add('scale-95', 'opacity-0');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }, 200);
+    }
+    
+    // Close popup when clicking outside
+    document.getElementById('popupOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closePopup();
+        }
+    });
+    
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closePopup();
+        }
+    });
+
+    // Prevent popup from closing when clicking inside
+    document.getElementById('popupContainer').addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+</script>
+
+<!-- Enhanced Footer Section -->
+<footer class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%23ffffff\" fill-opacity=\"0.1\" fill-rule=\"evenodd\"/%3E%3C/svg%3E');"></div>
+    </div>
+
+    <!-- Floating Elements -->
+    <div class="absolute inset-0">
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-indigo-600 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse animation-delay-4000"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Main Footer Content -->
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8 lg:gap-12 mb-12">
+            <!-- Brand Section -->
+            <div class="lg:col-span-1">
+                <div class="flex items-center space-x-3 mb-6 group">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center backdrop-blur-sm border border-blue-400/30 group-hover:scale-110 transition-all duration-300">
+                        <span class="text-white font-bold text-lg">N</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">NORSU Bayawan</h3>
+                        <p class="text-cyan-300 text-sm mt-1">Excellence in Education</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-6 text-sm">
+                    Providing quality, affordable, and relevant education that produces technologically competent 
+                    and environmentally conscious individuals for sustainable development.
+                </p>
+                <div class="flex items-center space-x-2 text-cyan-300">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <span class="text-sm font-medium">ISO Certified Institution</span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="lg:col-span-1">
+                <h4 class="text-lg font-bold mb-6 relative inline-block">
+                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Quick Links</span>
+                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+                </h4>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/about/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>About Us</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/academics/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Academics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admissions/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Admissions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/contact/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
+                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="lg:col-span-1">
+                <h4 class="text-lg font-bold mb-6 relative inline-block">
+                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Contact Info</span>
+                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+                </h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor" />
+                                <circle cx="12" cy="9" r="2.5" fill="#ffffff" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-gray-300 text-sm font-medium">Address</span>
+                            <p class="text-white text-sm">Bayawan City, Negros Oriental, Philippines</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57.12.34.04.73-.24 1.01l-2.21 2.21z" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-gray-300 text-sm font-medium">Phone</span>
+                            <p class="text-white text-sm">(035) 123-4567</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-gray-300 text-sm font-medium">Email</span>
+                            <p class="text-white text-sm">info@norsu-bayawan.edu.ph</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 1a11 11 0 100 22 11 11 0 000-22zm1 11V6h-2v6h6v-2h-4z" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-gray-300 text-sm font-medium">Office Hours</span>
+                            <p class="text-white text-sm">Mon - Fri: 8:00 AM - 5:00 PM</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            {% include 'includes/footer_connect.html' %}
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-blue-700/50 pt-8">
+            <div class="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
+                <!-- Copyright -->
+                <div class="text-center lg:text-left">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2024 <span class="text-cyan-300 font-semibold">NORSU Bayawan</span>. All rights reserved.
+                    </p>
+                </div>
+
+                <!-- Additional Links -->
+                <div class="flex flex-wrap justify-center lg:justify-end space-x-6 text-sm">
+                    <a href="/privacy/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Privacy Policy</a>
+                    <a href="/terms/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Terms of Service</a>
+                    <a href="/sitemap/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Sitemap</a>
+                    <a href="/accessibility/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Accessibility</a>
+                </div>
+            </div>
+
+            <!-- Accreditation Badges -->
+            <div class="flex justify-center items-center space-x-6 mt-6 pt-6 border-t border-blue-700/30">
+                <div class="text-center group">
+                    <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-award text-white text-sm"></i>
+                    </div>
+                    <span class="text-gray-400 text-xs">CHED Recognized</span>
+                </div>
+                <div class="text-center group">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-star text-white text-sm"></i>
+                    </div>
+                    <span class="text-gray-400 text-xs">ISO 9001:2015</span>
+                </div>
+                <div class="text-center group">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-shield-alt text-white text-sm"></i>
+                    </div>
+                    <span class="text-gray-400 text-xs">Quality Assured</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 z-50 border border-cyan-400/30 backdrop-blur-sm">
+        <i class="fas fa-chevron-up text-sm"></i>
+    </button>
+</footer>
+{% endblock %}
