@@ -363,7 +363,11 @@
                                     {{ user.get_full_name|default:user.username }}
                                 </div>
                                 <div class="text-xs text-blue-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    Administrator
+                                    {% if user.is_staff or user.is_superuser %}
+                                        Administrator
+                                    {% else %}
+                                        Student
+                                    {% endif %}
                                 </div>
                             </div>
                             <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -400,7 +404,7 @@
                     <!-- Login Button -->
                     <a href="/accounts/login/" class="bg-black/10 hover:bg-white/20 text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/30 hover:shadow-lg flex items-center space-x-2">
                         <span>Login</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
                         </svg>
                     </a>
@@ -469,6 +473,30 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Toggle visibility and wiring for any scroll-to-top buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = Array.from(document.querySelectorAll('[data-scroll-to-top]'));
+            if (!buttons.length) return;
+
+            const toggleButtons = () => {
+                const shouldShow = window.scrollY > 200;
+                buttons.forEach(btn => {
+                    btn.classList.toggle('opacity-0', !shouldShow);
+                    btn.classList.toggle('pointer-events-none', !shouldShow);
+                });
+            };
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToTop();
+                });
+            });
+
+            window.addEventListener('scroll', toggleButtons);
+            toggleButtons();
+        });
     </script>
 
     <!-- Rest of your HTML content remains the same -->

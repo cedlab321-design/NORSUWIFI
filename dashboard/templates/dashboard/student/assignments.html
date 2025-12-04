@@ -17,10 +17,10 @@
                     <span class="text-xs font-semibold tracking-wide text-amber-700 uppercase">Assignments</span>
                 </div>
             </div>
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-primary-100 text-sm text-primary-700 shadow-sm">
+            <a href="#assignments-list" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/90 border border-primary-100 text-sm text-primary-700 shadow-sm hover:-translate-y-0.5 hover:shadow transition">
                 <i class="fas fa-bell text-primary-600"></i>
                 <span>Keep ahead of due dates</span>
-            </div>
+            </a>
         </div>
 
         <div class="grid gap-8 lg:grid-cols-[1.6fr,1fr] items-start">
@@ -33,7 +33,7 @@
                     <span class="px-3 py-1 text-xs font-semibold rounded-full bg-primary-50 text-primary-700 border border-primary-100">Total {{ assignments|length }}</span>
                 </div>
 
-                <div class="space-y-4">
+                <div class="space-y-4" id="assignments-list">
                     {% if assignments %}
                         {% for a in assignments %}
                             <div class="group relative overflow-hidden rounded-3xl border border-amber-100/80 bg-white/85 backdrop-blur p-5 shadow-sm hover:-translate-y-0.5 hover:shadow-md transition">

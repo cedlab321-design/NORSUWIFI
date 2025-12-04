@@ -1,0 +1,124 @@
+<!-- templates/academics/course_detail.html -->
+{% extends 'base.html' %}
+
+{% block title %}{{ course.code }} - {{ course.title }} | NORSU Bayawan{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="pt-24 pb-16 bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0">
+        <div class="absolute top-12 left-10 w-72 h-72 bg-sky-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-10 right-10 w-72 h-72 bg-sky-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
+            <span class="w-2 h-2 bg-sky-300 rounded-full mr-2 animate-pulse"></span>
+            <span class="text-sm font-medium text-white/90">Course Overview</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ course.title }}</h1>
+        <p class="text-sky-100 text-lg flex items-center gap-3">
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm font-semibold">{{ course.code }}</span>
+            <span class="text-white/60">&bull;</span>
+            <span class="inline-flex items-center gap-2">
+                <svg class="w-4 h-4 text-sky-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                    <circle cx="12" cy="9" r="2.5" fill="currentColor"></circle>
+                </svg>
+                {% if course.department %}<a href="{% url 'academics:department_detail' course.department.id %}" class="hover:text-white underline decoration-sky-300/70">{{ course.department.name }}</a>{% else %}No department{% endif %}
+            </span>
+        </p>
+    </div>
+</section>
+
+<!-- Content -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-10">
+        <!-- Main -->
+        <div class="lg:col-span-2 space-y-8">
+            <div class="bg-white rounded-3xl shadow-lg border border-sky-100 p-8">
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-sky-50 text-sky-800 text-sm font-medium mb-4">
+                    Course Description
+                </div>
+                <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+                    {{ course.description|linebreaks }}
+                </div>
+            </div>
+
+            {% if course.requirements %}
+            <div class="bg-gradient-to-br from-sky-50 to-white rounded-3xl border border-sky-100 shadow p-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-2xl font-bold text-gray-900">Requirements</h2>
+                    <span class="text-sm text-sky-700 bg-sky-100 px-3 py-1 rounded-full border border-sky-200">Plan ahead</span>
+                </div>
+                <div class="space-y-3 text-gray-700 leading-relaxed">
+                    {{ course.requirements|linebreaks }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+            <div class="bg-gradient-to-br from-sky-600 to-sky-500 text-white rounded-3xl p-6 shadow-lg">
+                <h3 class="text-xl font-semibold mb-4">At a glance</h3>
+                <ul class="space-y-3 text-sky-50">
+                    <li class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white/15 rounded-xl flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-sky-100">Course Code</p>
+                            <p class="font-semibold">{{ course.code }}</p>
+                        </div>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white/15 rounded-xl flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2" />
+                                <circle cx="12" cy="12" r="9" stroke-width="2"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-sky-100">Duration</p>
+                            <p class="font-semibold">{{ course.duration }}</p>
+                        </div>
+                    </li>
+                    {% if course.department %}
+                    <li class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-white/15 rounded-xl flex items-center justify-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                                <circle cx="12" cy="9" r="2.5" fill="currentColor"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-sky-100">Department</p>
+                            <p class="font-semibold">
+                                <a href="{% url 'academics:department_detail' course.department.id %}" class="underline decoration-white/40 hover:decoration-white"> {{ course.department.name }} </a>
+                            </p>
+                        </div>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="bg-white border border-sky-100 rounded-3xl p-6 shadow">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Next steps</h3>
+                <div class="space-y-3">
+                    {% if course.department %}
+                    <a href="{% url 'academics:department_detail' course.department.id %}" class="w-full inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-500 text-white px-4 py-3 rounded-xl font-semibold transition">
+                        Back to {{ course.department.name }}
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'academics:departments' %}" class="w-full inline-flex items-center justify-center gap-2 border border-sky-200 text-sky-700 hover:text-sky-800 hover:border-sky-300 px-4 py-3 rounded-xl font-semibold transition">
+                        View all departments
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

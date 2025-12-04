@@ -9,6 +9,7 @@
         <img src="{% static 'images/pic1.jpg' %}" alt="Campus view" class="hero-slide active" loading="lazy">
         <img src="{% static 'images/bk.jpg' %}" alt="Students" class="hero-slide" loading="lazy">
         <img src="{% static 'images/BK.png' %}" alt="Students" class="hero-slide" loading="lazy">
+        <img src="{% static 'images/A.png' %}" alt="Students" class="hero-slide" loading="lazy">
         <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
     </div>
 
@@ -74,7 +75,7 @@
 
 
 <!-- Latest News Section -->
-<section class="py-20 bg-gray-50">
+<section class="py-20 bg-sky-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 animate-slide-up">
@@ -98,11 +99,11 @@
                 </div>
                 <div class="p-6">
                     <div class="flex items-center text-sm text-gray-500 mb-3">
-                        <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-full text-xs font-medium">
+                        <span class="bg-sky-100 text-sky-600 px-2 py-1 rounded-full text-xs font-medium">
                             {{ news.published_date }}
                         </span>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors duration-300">
                         {{ news.title }}
                     </h3>
                     <p class="text-gray-600 leading-relaxed mb-4">
@@ -110,17 +111,17 @@
                     </p>
                     {% comment %} Link to news detail: prefer `get_absolute_url`, fallback to named url using slug, otherwise link to news list. {% endcomment %}
                     {% if news.get_absolute_url %}
-                    <a href="{{ news.get_absolute_url }}" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors duration-300">
+                    <a href="{{ news.get_absolute_url }}" class="inline-flex items-center text-sky-600 font-semibold hover:text-sky-700 transition-colors duration-300">
                         Read More
                         <span class="ml-1 group-hover:translate-x-1 transition-transform duration-300">?+'</span>
                     </a>
                     {% elif news.slug %}
-                    <a href="{% url 'news:detail' news.slug %}" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors duration-300">
+                    <a href="{% url 'news:detail' news.slug %}" class="inline-flex items-center text-sky-600 font-semibold hover:text-sky-700 transition-colors duration-300">
                         Read More
                         <span class="ml-1 group-hover:translate-x-1 transition-transform duration-300">?+'</span>
                     </a>
                     {% else %}
-                    <a href="/news/" class="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 transition-colors duration-300">
+                    <a href="/news/" class="inline-flex items-center text-sky-600 font-semibold hover:text-sky-700 transition-colors duration-300">
                         Read More
                         <span class="ml-1 group-hover:translate-x-1 transition-transform duration-300">?+'</span>
                     </a>
@@ -131,7 +132,7 @@
         </div>
         
         <div class="text-center mt-12">
-            <a href="/news/" class="inline-flex items-center px-6 py-3 border-2 border-blue-600 text-blue-600 font-semibold rounded-2xl hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+            <a href="/news/" class="inline-flex items-center px-6 py-3 border-2 border-sky-600 text-sky-600 font-semibold rounded-2xl hover:bg-sky-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                 View All News
                 <span class="ml-2"></span>
             </a>
@@ -154,7 +155,7 @@
         
         <div class="grid md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
             {% for event in upcoming_events %}
-            <div class="group bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-slide-up" style="animation-delay: {{ forloop.counter|add:2 }}00ms;">
+            <div class="group bg-gradient-to-r from-sky-50 to-sky-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-slide-up" style="animation-delay: {{ forloop.counter|add:2 }}00ms;">
                 <div class="md:flex">
                     <div class="md:flex-shrink-0 md:w-64">
                         <div class="h-48 md:h-full overflow-hidden">
@@ -174,14 +175,14 @@
                                 {{ event.location }}
                             </span>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors duration-300">
                             {{ event.title }}
                         </h3>
                         <p class="text-gray-600 leading-relaxed mb-4">
                             {{ event.description }}
                         </p>
                         <div class="flex items-center justify-between">
-                            <a href="#" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
+                            <a href="#" class="inline-flex items-center text-sky-600 font-semibold hover:text-sky-700 transition-colors duration-300">
                                 Learn More
                                 <span class="ml-1 group-hover:translate-x-1 transition-transform duration-300">?+'</span>
                             </a>
@@ -194,7 +195,7 @@
         </div>
         
         <div class="text-center mt-12">
-            <a href="/events/" class="inline-flex items-center px-6 py-3 border-2 border-orange-600 text-orange-600 font-semibold rounded-2xl hover:bg-orange-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+            <a href="/events/" class="inline-flex items-center px-6 py-3 border-2 border-sky-600 text-sky-600 font-semibold rounded-2xl hover:bg-sky-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1">
                 View All Events
                 <span class="ml-2"></span>
             </a>

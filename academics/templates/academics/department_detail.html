@@ -4,26 +4,20 @@
 {% block title %}{{ department.name }} - NORSU Bayawan{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="pt-24 pb-16 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white relative overflow-hidden">
-    <!-- Background Elements -->
+<!-- Hero -->
+<section class="pt-24 pb-16 bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900 text-white relative overflow-hidden">
     <div class="absolute inset-0">
-        <div class="absolute top-10 left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div class="absolute bottom-20 right-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div class="absolute top-10 left-10 w-72 h-72 bg-sky-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-72 h-72 bg-sky-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
     </div>
-    
+
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="animate-fade-in">
-            <!-- Badge -->
-            <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
-                <span class="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
-                <span class="text-white/90 text-sm font-medium">Academic Department</span>
-            </div>
-            
-            <!-- Main Heading -->
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{{ department.name }}</h1>
-            <p class="text-xl text-blue-100 max-w-3xl">{{ department.description|truncatewords:20 }}</p>
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
+            <span class="w-2 h-2 bg-sky-300 rounded-full mr-2 animate-pulse"></span>
+            <span class="text-white/90 text-sm font-medium">Academic Department</span>
         </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{{ department.name }}</h1>
+        <p class="text-xl text-sky-100 max-w-3xl">{{ department.description|truncatewords:20 }}</p>
     </div>
 </section>
 
@@ -31,22 +25,23 @@
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-3 gap-12">
-            <div class="lg:col-span-2">
-                <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-6">
-                    🏛️ About the Department
+            <div class="lg:col-span-2 space-y-6">
+                <div class="inline-flex items-center px-4 py-2 rounded-full bg-sky-100 text-sky-800 text-sm font-medium">
+                    About the Department
                 </div>
-                <h2 class="text-3xl font-bold text-gray-900 mb-6">Department Overview</h2>
+                <h2 class="text-3xl font-bold text-gray-900">Department Overview</h2>
                 <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-4">
                     {{ department.description|linebreaks }}
                 </div>
-                
-                <!-- Contact Info -->
-                <div class="mt-8 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-200">
+
+                <div class="mt-6 bg-gradient-to-r from-sky-50 to-sky-50 rounded-2xl p-6 border border-sky-200">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Department Leadership</h3>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-                                <span class="text-white text-sm">👤</span>
+                            <div class="w-10 h-10 bg-sky-500 rounded-lg flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM6 20c0-2.21 2.69-4 6-4s6 1.79 6 4" />
+                                </svg>
                             </div>
                             <div>
                                 <p class="text-sm text-gray-600">Department Head</p>
@@ -55,8 +50,11 @@
                         </div>
                         {% if department.email %}
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center">
-                                <span class="text-white text-sm">✉️</span>
+                            <div class="w-10 h-10 bg-sky-500 rounded-lg flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16v12H4z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6l8 6 8-6" />
+                                </svg>
                             </div>
                             <div>
                                 <p class="text-sm text-gray-600">Email</p>
@@ -66,8 +64,10 @@
                         {% endif %}
                         {% if department.phone %}
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
-                                <span class="text-white text-sm">📞</span>
+                            <div class="w-10 h-10 bg-emerald-500 rounded-lg flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l2 5-2 2a11 11 0 007 7l2-2 5 2v2a2 2 0 01-2 2A15 15 0 013 8a2 2 0 012-3z" />
+                                </svg>
                             </div>
                             <div>
                                 <p class="text-sm text-gray-600">Phone</p>
@@ -78,91 +78,104 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Quick Info Sidebar -->
+
+            <!-- Sidebar -->
             <div class="space-y-6">
-                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-200">
+                <div class="bg-gradient-to-br from-sky-50 to-sky-50 rounded-2xl p-6 border border-sky-200">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Department at a Glance</h3>
                     <div class="space-y-4">
-                        <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-blue-100">
+                        <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-sky-100">
                             <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white text-sm">📚</span>
+                                <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    </svg>
                                 </div>
                                 <span class="text-gray-700">Programs</span>
                             </div>
-                            <span class="text-blue-600 font-bold text-lg">{{ courses.count }}</span>
+                            <span class="text-sky-600 font-bold text-lg">{{ courses.count }}</span>
                         </div>
-                        <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-blue-100">
+                        <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-sky-100">
                             <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
-                                    <span class="text-white text-sm">👤</span>
+                                <div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM6 20c0-2.21 2.69-4 6-4s6 1.79 6 4" />
+                                    </svg>
                                 </div>
                                 <span class="text-gray-700">Department Head</span>
                             </div>
-                            <span class="text-green-600 font-semibold">{{ department.head|truncatewords:2 }}</span>
+                            <span class="text-emerald-600 font-semibold">{{ department.head|truncatewords:2 }}</span>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Back to Departments -->
-                <a href="{% url 'academics:departments' %}" class="block w-full bg-white border border-blue-200 text-blue-600 px-6 py-4 rounded-2xl font-semibold hover:bg-blue-50 transition-all duration-200 text-center">
-                    ← Back to All Departments
+
+                <a href="{% url 'academics:departments' %}" class="block w-full bg-white border border-sky-200 text-sky-600 px-6 py-4 rounded-2xl font-semibold hover:bg-sky-50 transition-all duration-200 text-center inline-flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Back to All Departments
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Courses List -->
-<section class="py-20 bg-gradient-to-b from-blue-50 to-white">
+<!-- Courses -->
+<section class="py-20 bg-gradient-to-b from-sky-50 to-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <h2 class="text-4xl font-bold text-gray-900 mb-4">
-                Academic 
-                <span class="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">Programs</span>
+                Academic
+                <span class="bg-gradient-to-r from-sky-600 to-sky-600 bg-clip-text text-transparent">Programs</span>
             </h2>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                Explore the programs offered by the {{ department.name }} department
+                Explore the programs offered by the {{ department.name }} department.
             </p>
         </div>
-        
+
         <div class="grid gap-6">
             {% for course in courses %}
-            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-blue-100 overflow-hidden">
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-sky-100 overflow-hidden">
                 <div class="p-6">
                     <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between">
                         <div class="flex-1">
                             <div class="flex items-start space-x-4">
-                                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <div class="w-12 h-12 bg-gradient-to-r from-sky-500 to-sky-500 rounded-xl flex items-center justify-center flex-shrink-0">
                                     <span class="text-white font-bold text-sm">{{ course.code }}</span>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-sky-600 transition-colors duration-200">
                                         {{ course.title }}
                                     </h3>
                                     <p class="text-gray-600 mb-4 leading-relaxed">{{ course.description|truncatewords:35 }}</p>
-                                    
+
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                        <div class="flex items-center space-x-1">
-                                            <span>⏱️</span>
+                                        <div class="flex items-center space-x-2">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="9" stroke-width="2"></circle>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 7v5l3 2" />
+                                            </svg>
                                             <span>{{ course.duration }}</span>
                                         </div>
                                         {% if course.requirements %}
-                                        <div class="flex items-center space-x-1">
-                                            <span>📋</span>
-                                            <span>Requirements Available</span>
+                                        <div class="flex items-center space-x-2">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            <span>Requirements available</span>
                                         </div>
                                         {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="mt-4 lg:mt-0 lg:ml-6">
-                            <a href="{% url 'academics:course_detail' course.pk %}" class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-500 transition-all duration-200 group-hover:scale-105 shadow-lg hover:shadow-xl">
+                            <a href="{% url 'academics:course_detail' course.pk %}" class="inline-flex items-center bg-sky-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-sky-500 transition-all duration-200 group-hover:scale-105 shadow-lg hover:shadow-xl">
                                 <span>View Details</span>
-                                <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
                             </a>
                         </div>
                     </div>
@@ -170,16 +183,21 @@
             </div>
             {% empty %}
             <div class="text-center py-16">
-                <div class="bg-white rounded-3xl p-12 shadow-lg border border-blue-100">
-                    <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <span class="text-3xl text-blue-600">🎓</span>
+                <div class="bg-white rounded-3xl p-12 shadow-lg border border-sky-100">
+                    <div class="w-20 h-20 bg-sky-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6M5 3h14v18H5z" />
+                        </svg>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">No Programs Available</h3>
                     <p class="text-gray-600 max-w-md mx-auto mb-6">
                         Academic programs for this department will be listed here once they are added to the system.
                     </p>
-                    <a href="{% url 'academics:departments' %}" class="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-500 transition-all duration-200">
-                        ← Back to Departments
+                    <a href="{% url 'academics:departments' %}" class="inline-flex items-center bg-sky-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-sky-500 transition-all duration-200 gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Back to Departments
                     </a>
                 </div>
             </div>
@@ -188,25 +206,25 @@
     </div>
 </section>
 
-<!-- Stats Section -->
-<section class="py-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+<!-- Stats -->
+<section class="py-16 bg-gradient-to-r from-sky-900 to-sky-800 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div class="p-6">
-                <div class="text-3xl font-bold text-cyan-300 mb-2">{{ courses.count }}</div>
-                <div class="text-blue-200 font-medium">Programs Offered</div>
+                <div class="text-3xl font-bold text-sky-300 mb-2">{{ courses.count }}</div>
+                <div class="text-sky-200 font-medium">Programs Offered</div>
             </div>
             <div class="p-6">
-                <div class="text-3xl font-bold text-cyan-300 mb-2">50+</div>
-                <div class="text-blue-200 font-medium">Faculty Members</div>
+                <div class="text-3xl font-bold text-sky-300 mb-2">50+</div>
+                <div class="text-sky-200 font-medium">Faculty Members</div>
             </div>
             <div class="p-6">
-                <div class="text-3xl font-bold text-cyan-300 mb-2">500+</div>
-                <div class="text-blue-200 font-medium">Students Enrolled</div>
+                <div class="text-3xl font-bold text-sky-300 mb-2">500+</div>
+                <div class="text-sky-200 font-medium">Students Enrolled</div>
             </div>
             <div class="p-6">
-                <div class="text-3xl font-bold text-cyan-300 mb-2">95%</div>
-                <div class="text-blue-200 font-medium">Graduation Rate</div>
+                <div class="text-3xl font-bold text-sky-300 mb-2">95%</div>
+                <div class="text-sky-200 font-medium">Graduation Rate</div>
             </div>
         </div>
     </div>

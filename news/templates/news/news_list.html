@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="bg-blue-700 text-white py-16">
+<section class="bg-sky-700 text-white py-16">
     <div class="max-w-7xl mx-auto px-6">
         <h1 class="text-4xl font-bold mb-4">Campus News</h1>
         <p class="text-xl">Stay updated with the latest happenings at NORSU Bayawan</p>
@@ -29,14 +29,14 @@
                         <span>By {{ news.author.get_full_name|default:news.author.username }}</span>
                     </div>
                     
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors duration-300">
                         {{ news.title }}
                     </h3>
                     <p class="text-gray-600 mb-4 line-clamp-3">{{ news.excerpt }}</p>
                     
                     <!-- Read More Button with Popup -->
                     <button onclick="openPopup('popup{{ forloop.counter }}')" 
-                            class="inline-flex items-center space-x-2 text-blue-700 hover:text-green-600 font-semibold group/readmore transition-all duration-500 relative pb-1">
+                            class="inline-flex items-center space-x-2 text-sky-700 hover:text-green-600 font-semibold group/readmore transition-all duration-500 relative pb-1">
                         <span>Read More</span>
                         <span class="transform group-hover/readmore:translate-x-2 transition-transform duration-300">→</span>
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 group-hover/readmore:w-full transition-all duration-500"></span>
@@ -84,7 +84,7 @@
 
                     <!-- Action Buttons -->
                     <div class="flex space-x-4 mt-8 pt-6 border-t border-gray-200">
-                        <button onclick="closePopup()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                        <button onclick="closePopup()" class="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors font-semibold">
                             Close Article
                         </button>
                         <button class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
@@ -112,7 +112,7 @@
                 
                 {% for num in page_obj.paginator.page_range %}
                 {% if page_obj.number == num %}
-                <span class="px-4 py-2 bg-blue-600 text-white rounded-lg">{{ num }}</span>
+                <span class="px-4 py-2 bg-sky-600 text-white rounded-lg">{{ num }}</span>
                 {% else %}
                 <a href="?page={{ num }}" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                     {{ num }}
@@ -253,7 +253,7 @@
 </script>
 
 <!-- Enhanced Footer Section -->
-<footer class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white relative overflow-hidden">
+<footer class="bg-gradient-to-br from-gray-900 via-sky-900 to-gray-900 text-white relative overflow-hidden">
     <!-- Background Pattern -->
     <div class="absolute inset-0 opacity-5">
         <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%23ffffff\" fill-opacity=\"0.1\" fill-rule=\"evenodd\"/%3E%3C/svg%3E');"></div>
@@ -261,9 +261,9 @@
 
     <!-- Floating Elements -->
     <div class="absolute inset-0">
-        <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-indigo-600 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse animation-delay-4000"></div>
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-sky-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-sky-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-sky-600 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse animation-delay-4000"></div>
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -272,19 +272,19 @@
             <!-- Brand Section -->
             <div class="lg:col-span-1">
                 <div class="flex items-center space-x-3 mb-6 group">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center backdrop-blur-sm border border-blue-400/30 group-hover:scale-110 transition-all duration-300">
+                    <div class="w-12 h-12 bg-gradient-to-r from-sky-500 to-sky-500 rounded-xl flex items-center justify-center backdrop-blur-sm border border-sky-400/30 group-hover:scale-110 transition-all duration-300">
                         <span class="text-white font-bold text-lg">N</span>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">NORSU Bayawan</h3>
-                        <p class="text-cyan-300 text-sm mt-1">Excellence in Education</p>
+                        <h3 class="text-2xl font-bold bg-gradient-to-r from-white to-sky-200 bg-clip-text text-transparent">NORSU Bayawan</h3>
+                        <p class="text-sky-300 text-sm mt-1">Excellence in Education</p>
                     </div>
                 </div>
                 <p class="text-gray-300 leading-relaxed mb-6 text-sm">
                     Providing quality, affordable, and relevant education that produces technologically competent 
                     and environmentally conscious individuals for sustainable development.
                 </p>
-                <div class="flex items-center space-x-2 text-cyan-300">
+                <div class="flex items-center space-x-2 text-sky-300">
                     <i class="fas fa-star text-yellow-400"></i>
                     <span class="text-sm font-medium">ISO Certified Institution</span>
                 </div>
@@ -293,37 +293,37 @@
             <!-- Quick Links -->
             <div class="lg:col-span-1">
                 <h4 class="text-lg font-bold mb-6 relative inline-block">
-                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Quick Links</span>
-                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+                    <span class="bg-gradient-to-r from-sky-400 to-sky-400 bg-clip-text text-transparent">Quick Links</span>
+                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-sky-400 to-sky-400 rounded-full"></div>
                 </h4>
                 <ul class="space-y-3">
                     <li>
                         <a href="/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>Home</span>
                         </a>
                     </li>
                     <li>
                         <a href="/about/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>About Us</span>
                         </a>
                     </li>
                     <li>
                         <a href="/academics/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>Academics</span>
                         </a>
                     </li>
                     <li>
                         <a href="/admissions/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>Admissions</span>
                         </a>
                     </li>
                     <li>
                         <a href="/contact/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>Contact</span>
                         </a>
                     </li>
@@ -333,13 +333,13 @@
             <!-- Contact Info -->
             <div class="lg:col-span-1">
                 <h4 class="text-lg font-bold mb-6 relative inline-block">
-                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Contact Info</span>
-                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+                    <span class="bg-gradient-to-r from-sky-400 to-sky-400 bg-clip-text text-transparent">Contact Info</span>
+                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-sky-400 to-sky-400 rounded-full"></div>
                 </h4>
                 <ul class="space-y-4">
                     <li class="flex items-start space-x-3 group">
-                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
-                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <div class="w-8 h-8 bg-sky-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor" />
                                 <circle cx="12" cy="9" r="2.5" fill="#ffffff" />
                             </svg>
@@ -350,8 +350,8 @@
                         </div>
                     </li>
                     <li class="flex items-start space-x-3 group">
-                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
-                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <div class="w-8 h-8 bg-sky-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57.12.34.04.73-.24 1.01l-2.21 2.21z" fill="currentColor" />
                             </svg>
                         </div>
@@ -361,8 +361,8 @@
                         </div>
                     </li>
                     <li class="flex items-start space-x-3 group">
-                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
-                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <div class="w-8 h-8 bg-sky-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor" />
                             </svg>
                         </div>
@@ -372,8 +372,8 @@
                         </div>
                     </li>
                     <li class="flex items-start space-x-3 group">
-                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
-                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <div class="w-8 h-8 bg-sky-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M12 1a11 11 0 100 22 11 11 0 000-22zm1 11V6h-2v6h6v-2h-4z" fill="currentColor" />
                             </svg>
                         </div>
@@ -389,26 +389,26 @@
         </div>
 
         <!-- Bottom Bar -->
-        <div class="border-t border-blue-700/50 pt-8">
+        <div class="border-t border-sky-700/50 pt-8">
             <div class="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
                 <!-- Copyright -->
                 <div class="text-center lg:text-left">
                     <p class="text-gray-400 text-sm">
-                        &copy; 2024 <span class="text-cyan-300 font-semibold">NORSU Bayawan</span>. All rights reserved.
+                        &copy; 2024 <span class="text-sky-300 font-semibold">NORSU Bayawan</span>. All rights reserved.
                     </p>
                 </div>
 
                 <!-- Additional Links -->
                 <div class="flex flex-wrap justify-center lg:justify-end space-x-6 text-sm">
-                    <a href="/privacy/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Privacy Policy</a>
-                    <a href="/terms/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Terms of Service</a>
-                    <a href="/sitemap/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Sitemap</a>
-                    <a href="/accessibility/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Accessibility</a>
+                    <a href="/privacy/" class="text-gray-400 hover:text-sky-300 transition-colors duration-300">Privacy Policy</a>
+                    <a href="/terms/" class="text-gray-400 hover:text-sky-300 transition-colors duration-300">Terms of Service</a>
+                    <a href="/sitemap/" class="text-gray-400 hover:text-sky-300 transition-colors duration-300">Sitemap</a>
+                    <a href="/accessibility/" class="text-gray-400 hover:text-sky-300 transition-colors duration-300">Accessibility</a>
                 </div>
             </div>
 
             <!-- Accreditation Badges -->
-            <div class="flex justify-center items-center space-x-6 mt-6 pt-6 border-t border-blue-700/30">
+            <div class="flex justify-center items-center space-x-6 mt-6 pt-6 border-t border-sky-700/30">
                 <div class="text-center group">
                     <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-award text-white text-sm"></i>
@@ -422,7 +422,7 @@
                     <span class="text-gray-400 text-xs">ISO 9001:2015</span>
                 </div>
                 <div class="text-center group">
-                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <div class="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-shield-alt text-white text-sm"></i>
                     </div>
                     <span class="text-gray-400 text-xs">Quality Assured</span>
@@ -432,8 +432,11 @@
     </div>
 
     <!-- Back to Top Button -->
-    <button onclick="scrollToTop()" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 z-50 border border-cyan-400/30 backdrop-blur-sm">
-        <i class="fas fa-chevron-up text-sm"></i>
+    <button data-scroll-to-top class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-sky-500 to-sky-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 z-50 border border-sky-400/30 backdrop-blur-sm transition-opacity opacity-0 pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="11" stroke="white" stroke-width="1.4" opacity="0.35"></circle>
+            <path d="M12 7l-4 5m4-5l4 5m-4-5v10" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
     </button>
 </footer>
 {% endblock %}

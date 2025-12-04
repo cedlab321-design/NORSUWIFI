@@ -4,69 +4,77 @@
 {% block title %}Academic Departments - NORSU Bayawan{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="pt-0 pb-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white relative overflow-hidden">
-    <!-- Background Elements -->
+<!-- Hero -->
+<section class="pt-0 pb-0 bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900 text-white relative overflow-hidden">
     <div class="absolute inset-0">
-        <div class="absolute top-10 left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div class="absolute top-40 right-10 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div class="absolute top-10 left-10 w-72 h-72 bg-sky-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-sky-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
     </div>
-    
+
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="animate-fade-in">
-            <!-- Badge -->
             <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
-                <span class="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
+                <span class="w-2 h-2 bg-sky-400 rounded-full mr-2 animate-pulse"></span>
                 <span class="text-white/90 text-sm font-medium">Academic Excellence</span>
             </div>
-            
-            <!-- Main Heading -->
+
             <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                Academic 
-                <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Departments</span>
+                Academic
+                <span class="bg-gradient-to-r from-sky-400 to-sky-400 bg-clip-text text-transparent">Departments</span>
             </h1>
-            
-            <!-- Subtitle -->
+
             <p class="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
                 Explore our diverse academic programs and departments dedicated to shaping future leaders and innovators.
             </p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <a href="{% url 'academics:calendar' %}" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-sky-800 font-semibold shadow hover:-translate-y-0.5 hover:shadow-lg transition">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>School Calendar</span>
+                </a>
+                <a href="#departments-grid" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-semibold shadow hover:-translate-y-0.5 hover:shadow-lg transition">
+                    <i class="fas fa-layer-group"></i>
+                    <span>View Departments</span>
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Departments Grid -->
-<section class="py-20 bg-gradient-to-b from-white to-blue-50">
+<!-- Departments -->
+<section class="py-20 bg-gradient-to-b from-white to-sky-50" id="departments-grid">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for department in departments %}
-            <div class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-blue-100">
+            <div class="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-sky-100">
                 {% if department.image %}
                 <div class="h-48 overflow-hidden">
                     <img src="{{ department.image.url }}" alt="{{ department.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 {% else %}
-                <div class="h-48 bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center relative overflow-hidden">
+                <div class="h-48 bg-gradient-to-br from-sky-600 to-sky-600 flex items-center justify-center relative overflow-hidden">
                     <span class="text-white text-3xl font-bold z-10">{{ department.name|slice:":2" }}</span>
                     <div class="absolute inset-0 bg-black/20"></div>
                 </div>
                 {% endif %}
-                
+
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-200">{{ department.name }}</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-sky-600 transition-colors duration-200">{{ department.name }}</h3>
                     <p class="text-gray-600 mb-4 line-clamp-3 leading-relaxed">{{ department.description|truncatewords:25 }}</p>
-                    
+
                     <div class="flex items-center text-sm text-gray-500 mb-4">
-                        <div class="flex items-center space-x-1">
-                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                            <span>👤 {{ department.head }}</span>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-sky-500 rounded-full"></span>
+                            <span class="font-semibold text-gray-700">Head:</span>
+                            <span>{{ department.head }}</span>
                         </div>
                     </div>
-                    
-                    <!-- Read More Button with Popup -->
-                    <button onclick="openPopup('popup{{ forloop.counter }}')" 
-                            class="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold group-hover:translate-x-1 transition-all duration-200">
+
+                    <button onclick="openPopup('popup{{ forloop.counter }}')"
+                            class="inline-flex items-center text-sky-600 hover:text-sky-700 font-semibold group-hover:translate-x-1 transition-all duration-200">
                         <span>Explore Programs</span>
-                        <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -74,60 +82,55 @@
             <!-- Hidden Popup Content -->
             <div id="popup{{ forloop.counter }}" class="hidden">
                 <div class="p-8 max-h-[85vh] overflow-y-auto">
-                    <!-- Close Button -->
                     <button onclick="closePopup()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors p-2 rounded-full hover:bg-gray-100 z-10">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
 
-                    <!-- Department Image -->
                     {% if department.image %}
                     <div class="mb-6 -mx-8 -mt-8">
-                        <img src="{{ department.image.url }}" alt="{{ department.name }}" 
-                             class="w-full h-64 object-cover">
+                        <img src="{{ department.image.url }}" alt="{{ department.name }}" class="w-full h-64 object-cover">
                     </div>
                     {% else %}
-                    <div class="mb-6 -mx-8 -mt-8 h-64 bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
+                    <div class="mb-6 -mx-8 -mt-8 h-64 bg-gradient-to-br from-sky-600 to-sky-600 flex items-center justify-center">
                         <span class="text-white text-4xl font-bold">{{ department.name }}</span>
                     </div>
                     {% endif %}
 
-                    <!-- Department Header -->
                     <div class="mb-6">
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <span>Academic Department</span>
-                            <span class="mx-2">•</span>
+                        <div class="flex items-center text-sm text-gray-500 mb-3 gap-3">
+                            <span class="inline-flex items-center gap-1">
+                                <span class="w-2 h-2 bg-sky-500 rounded-full"></span>
+                                <span>Academic Department</span>
+                            </span>
+                            <span class="text-gray-400">|</span>
                             <span>Department Head: {{ department.head }}</span>
                         </div>
                         <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ department.name }}</h2>
                     </div>
 
-                    <!-- Department Content -->
-                    <div class="prose max-w-none text-gray-700">
+                    <div class="prose max-w-none text-gray-700 space-y-4">
                         {{ department.description|linebreaks }}
-                        
-                        <!-- Sample content if department.description is not available -->
                         {% if not department.description %}
-                        <p class="mb-4">The {{ department.name }} department at NORSU Bayawan is committed to providing high-quality education and fostering academic excellence. Our programs are designed to equip students with the knowledge and skills needed for successful careers in their chosen fields.</p>
-                        <p class="mb-4">We offer a comprehensive curriculum taught by experienced faculty members who are dedicated to student success. Our department provides state-of-the-art facilities and resources to support both teaching and research activities.</p>
-                        <p class="mb-6">Students in our department benefit from hands-on learning experiences, industry partnerships, and opportunities for professional development that prepare them for the challenges of the modern workforce.</p>
+                        <p>The {{ department.name }} department at NORSU Bayawan is committed to providing high-quality education and fostering academic excellence. Our programs are designed to equip students with the knowledge and skills needed for successful careers in their chosen fields.</p>
+                        <p>We offer a comprehensive curriculum taught by experienced faculty members who are dedicated to student success. Our department provides facilities and resources to support both teaching and research activities.</p>
+                        <p>Students benefit from hands-on learning experiences, industry partnerships, and opportunities for professional development that prepare them for the modern workforce.</p>
                         {% endif %}
                     </div>
 
-                    <!-- Programs List -->
                     <div class="mt-8">
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Available Programs</h3>
                         <div class="space-y-3">
                             {% for course in department.courses.all|slice:":5" %}
-                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                            <div class="flex items-center justify-between p-3 bg-sky-50 rounded-lg border border-sky-200">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+                                    <div class="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center">
                                         <span class="text-white text-xs font-bold">{{ course.code|slice:":3" }}</span>
                                     </div>
                                     <span class="text-gray-700 font-medium">{{ course.title }}</span>
                                 </div>
-                                <span class="text-blue-600 text-sm font-semibold">{{ course.duration }}</span>
+                                <span class="text-sky-600 text-sm font-semibold">{{ course.duration }}</span>
                             </div>
                             {% empty %}
                             <div class="text-center py-4 text-gray-500">
@@ -137,9 +140,8 @@
                         </div>
                     </div>
 
-                    <!-- Action Buttons -->
                     <div class="flex space-x-4 mt-8 pt-6 border-t border-gray-200">
-                        <button onclick="closePopup()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                        <button onclick="closePopup()" class="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors font-semibold">
                             Close
                         </button>
                         <a href="{% url 'academics:department_detail' department.pk %}" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold text-center">
@@ -150,9 +152,11 @@
             </div>
             {% empty %}
             <div class="col-span-3 text-center py-16">
-                <div class="bg-white rounded-3xl p-12 shadow-lg border border-blue-100">
-                    <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <span class="text-3xl text-blue-600">📚</span>
+                <div class="bg-white rounded-3xl p-12 shadow-lg border border-sky-100">
+                    <div class="w-20 h-20 bg-sky-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6M5 3h14v18H5z" />
+                        </svg>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">No Departments Available</h3>
                     <p class="text-gray-600 max-w-md mx-auto">
@@ -169,26 +173,26 @@
 <div id="popupOverlay" class="fixed inset-0 bg-black/50 z-50 hidden backdrop-blur-sm">
     <div class="flex items-center justify-center min-h-screen p-4">
         <div id="popupContainer" class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden transform scale-95 opacity-0 transition-all duration-300 relative">
-            <!-- Popup content will be loaded here -->
+            <!-- Popup content will be injected -->
         </div>
     </div>
 </div>
 
-<!-- CTA Section -->
-<section class="py-16 bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+<!-- CTA -->
+<section class="py-16 bg-gradient-to-r from-sky-900 to-sky-800 text-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">
             Ready to Start Your
-            <span class="text-cyan-300">Academic Journey?</span>
+            <span class="text-sky-300">Academic Journey?</span>
         </h2>
-        <p class="text-xl text-blue-200 mb-8 max-w-2xl mx-auto">
+        <p class="text-xl text-sky-200 mb-8 max-w-2xl mx-auto">
             Discover the perfect program that matches your interests and career goals.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/contact/" class="bg-cyan-500 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-cyan-400 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+            <a href="/contact/" class="bg-sky-500 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-sky-400 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
                 Contact Admissions
             </a>
-            <a href="/downloads/" class="border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-blue-900 transition-all duration-300 transform hover:-translate-y-1">
+            <a href="/downloads/" class="border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-sky-900 transition-all duration-300 transform hover:-translate-y-1">
                 Download Brochure
             </a>
         </div>
@@ -197,281 +201,169 @@
 
 <style>
     @keyframes slide-up {
-        0% {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes slide-left {
-        0% {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        0% { opacity: 0; transform: translateX(-50px); }
+        100% { opacity: 1; transform: translateX(0); }
     }
-
     @keyframes slide-right {
-        0% {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        0% { opacity: 0; transform: translateX(50px); }
+        100% { opacity: 1; transform: translateX(0); }
     }
-
     @keyframes fade-in {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
+        0% { opacity: 0; }
+        100% { opacity: 1; }
     }
-
-    .animate-slide-up {
-        animation: slide-up 0.6s ease-out forwards;
-        opacity: 0;
-    }
-
-    .animate-slide-left {
-        animation: slide-left 0.6s ease-out forwards;
-        opacity: 0;
-    }
-
-    .animate-slide-right {
-        animation: slide-right 0.6s ease-out forwards;
-        opacity: 0;
-    }
-
-    .animate-fade-in {
-        animation: fade-in 0.8s ease-out forwards;
-    }
-
-    .animation-delay-2000 {
-        animation-delay: 2s;
-    }
-
-    /* Reduced motion support */
+    .animate-slide-up { animation: slide-up 0.6s ease-out forwards; opacity: 0; }
+    .animate-slide-left { animation: slide-left 0.6s ease-out forwards; opacity: 0; }
+    .animate-slide-right { animation: slide-right 0.6s ease-out forwards; opacity: 0; }
+    .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+    .animation-delay-2000 { animation-delay: 2s; }
     @media (prefers-reduced-motion: reduce) {
         .animate-slide-up,
         .animate-slide-left,
         .animate-slide-right,
-        .animate-fade-in {
-            animation: fade-in 0.8s ease-out forwards;
-            transform: none !important;
-        }
+        .animate-fade-in { animation: fade-in 0.8s ease-out forwards; transform: none !important; }
     }
-
-    .line-clamp-3 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-    
-    .popup-open {
-        animation: popupOpen 0.3s ease-out forwards;
-    }
-    
-    .popup-close {
-        animation: popupClose 0.2s ease-in forwards;
-    }
-    
-    @keyframes popupOpen {
-        0% {
-            transform: scale(0.95);
-            opacity: 0;
-        }
-        100% {
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes popupClose {
-        0% {
-            transform: scale(1);
-            opacity: 1;
-        }
-        100% {
-            transform: scale(0.95);
-            opacity: 0;
-        }
-    }
-
-    /* Custom scrollbar for popup */
-    #popupContainer::-webkit-scrollbar {
-        width: 6px;
-    }
-    
-    #popupContainer::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 10px;
-    }
-    
-    #popupContainer::-webkit-scrollbar-thumb {
-        background: #c1c1c1;
-        border-radius: 10px;
-    }
-    
-    #popupContainer::-webkit-scrollbar-thumb:hover {
-        background: #a8a8a8;
-    }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .popup-open { animation: popupOpen 0.3s ease-out forwards; }
+    .popup-close { animation: popupClose 0.2s ease-in forwards; }
+    @keyframes popupOpen { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    @keyframes popupClose { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.95); opacity: 0; } }
+    #popupContainer::-webkit-scrollbar { width: 6px; }
+    #popupContainer::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+    #popupContainer::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 10px; }
+    #popupContainer::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
 </style>
-
 
 <script>
     function openPopup(popupId) {
         const overlay = document.getElementById('popupOverlay');
         const popupContainer = document.getElementById('popupContainer');
         const popupContent = document.getElementById(popupId);
-        
-        // Load content into popup container
         popupContainer.innerHTML = popupContent.innerHTML;
-        
-        // Show overlay and start animation
         overlay.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        
+        document.body.style.overflow = 'hidden';
         setTimeout(() => {
             popupContainer.classList.remove('scale-95', 'opacity-0');
             popupContainer.classList.add('popup-open');
         }, 10);
     }
-    
+
     function closePopup() {
         const overlay = document.getElementById('popupOverlay');
         const popupContainer = document.getElementById('popupContainer');
-        
         popupContainer.classList.remove('popup-open');
         popupContainer.classList.add('popup-close');
-        
         setTimeout(() => {
             overlay.classList.add('hidden');
             popupContainer.classList.remove('popup-close');
             popupContainer.classList.add('scale-95', 'opacity-0');
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
+            document.body.style.overflow = 'auto';
         }, 200);
     }
-    
-    // Close popup when clicking outside
+
     document.getElementById('popupOverlay').addEventListener('click', function(e) {
         if (e.target === this) {
             closePopup();
         }
     });
-    
-    // Close popup with Escape key
+
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closePopup();
         }
     });
 
-    // Prevent popup from closing when clicking inside
     document.getElementById('popupContainer').addEventListener('click', function(e) {
         e.stopPropagation();
     });
 </script>
 
-<!-- Enhanced Footer Section -->
-<footer class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white relative overflow-hidden">
-    <!-- Background Pattern -->
+<!-- Footer -->
+<footer class="bg-gradient-to-br from-gray-900 via-sky-900 to-gray-900 text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-5">
         <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"100\" height=\"100\" viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\" fill=\"%23ffffff\" fill-opacity=\"0.1\" fill-rule=\"evenodd\"/%3E%3C/svg%3E');"></div>
     </div>
 
-    <!-- Floating Elements -->
     <div class="absolute inset-0">
-        <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-indigo-600 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse animation-delay-4000"></div>
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-sky-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-sky-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-sky-600 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse animation-delay-4000"></div>
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <!-- Main Footer Content -->
         <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8 lg:gap-12 mb-12">
-            <!-- Brand Section -->
             <div class="lg:col-span-1">
                 <div class="flex items-center space-x-3 mb-6 group">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center backdrop-blur-sm border border-blue-400/30 group-hover:scale-110 transition-all duration-300">
+                    <div class="w-12 h-12 bg-gradient-to-r from-sky-500 to-sky-500 rounded-xl flex items-center justify-center backdrop-blur-sm border border-sky-400/30 group-hover:scale-110 transition-all duration-300">
                         <span class="text-white font-bold text-lg">N</span>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">NORSU Bayawan</h3>
-                        <p class="text-cyan-300 text-sm mt-1">Excellence in Education</p>
+                        <h3 class="text-2xl font-bold bg-gradient-to-r from-white to-sky-200 bg-clip-text text-transparent">NORSU Bayawan</h3>
+                        <p class="text-sky-300 text-sm mt-1">Excellence in Education</p>
                     </div>
                 </div>
                 <p class="text-gray-300 leading-relaxed mb-6 text-sm">
-                    Providing quality, affordable, and relevant education that produces technologically competent 
+                    Providing quality, affordable, and relevant education that produces technologically competent
                     and environmentally conscious individuals for sustainable development.
                 </p>
-                <div class="flex items-center space-x-2 text-cyan-300">
+                <div class="flex items-center space-x-2 text-sky-300">
                     <i class="fas fa-star text-yellow-400"></i>
                     <span class="text-sm font-medium">ISO Certified Institution</span>
                 </div>
             </div>
 
-            <!-- Quick Links -->
             <div class="lg:col-span-1">
                 <h4 class="text-lg font-bold mb-6 relative inline-block">
-                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Quick Links</span>
-                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+                    <span class="bg-gradient-to-r from-sky-400 to-sky-400 bg-clip-text text-transparent">Quick Links</span>
+                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-sky-400 to-sky-400 rounded-full"></div>
                 </h4>
                 <ul class="space-y-3">
                     <li>
                         <a href="/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>Home</span>
                         </a>
                     </li>
                     <li>
                         <a href="/about/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>About Us</span>
                         </a>
                     </li>
                     <li>
                         <a href="/academics/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>Academics</span>
                         </a>
                     </li>
                     <li>
                         <a href="/admissions/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>Admissions</span>
                         </a>
                     </li>
                     <li>
                         <a href="/contact/" class="flex items-center space-x-2 text-gray-300 hover:text-white group transition-all duration-300 transform hover:translate-x-2">
-                            <i class="fas fa-chevron-right text-cyan-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
+                            <i class="fas fa-chevron-right text-sky-400 text-xs group-hover:scale-125 transition-transform duration-300"></i>
                             <span>Contact</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <!-- Contact Info -->
             <div class="lg:col-span-1">
                 <h4 class="text-lg font-bold mb-6 relative inline-block">
-                    <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Contact Info</span>
-                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+                    <span class="bg-gradient-to-r from-sky-400 to-sky-400 bg-clip-text text-transparent">Contact Info</span>
+                    <div class="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-sky-400 to-sky-400 rounded-full"></div>
                 </h4>
                 <ul class="space-y-4">
                     <li class="flex items-start space-x-3 group">
-                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
-                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <div class="w-8 h-8 bg-sky-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor" />
                                 <circle cx="12" cy="9" r="2.5" fill="#ffffff" />
                             </svg>
@@ -482,8 +374,8 @@
                         </div>
                     </li>
                     <li class="flex items-start space-x-3 group">
-                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
-                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <div class="w-8 h-8 bg-sky-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57.12.34.04.73-.24 1.01l-2.21 2.21z" fill="currentColor" />
                             </svg>
                         </div>
@@ -493,8 +385,8 @@
                         </div>
                     </li>
                     <li class="flex items-start space-x-3 group">
-                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
-                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <div class="w-8 h-8 bg-sky-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="currentColor" />
                             </svg>
                         </div>
@@ -504,8 +396,8 @@
                         </div>
                     </li>
                     <li class="flex items-start space-x-3 group">
-                        <div class="w-8 h-8 bg-blue-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
-                            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <div class="w-8 h-8 bg-sky-600/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mt-1">
+                            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M12 1a11 11 0 100 22 11 11 0 000-22zm1 11V6h-2v6h6v-2h-4z" fill="currentColor" />
                             </svg>
                         </div>
@@ -520,27 +412,23 @@
             {% include 'includes/footer_connect.html' %}
         </div>
 
-        <!-- Bottom Bar -->
-        <div class="border-t border-blue-700/50 pt-8">
+        <div class="border-t border-sky-700/50 pt-8">
             <div class="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-                <!-- Copyright -->
                 <div class="text-center lg:text-left">
                     <p class="text-gray-400 text-sm">
-                        &copy; 2024 <span class="text-cyan-300 font-semibold">NORSU Bayawan</span>. All rights reserved.
+                        &copy; 2024 <span class="text-sky-300 font-semibold">NORSU Bayawan</span>. All rights reserved.
                     </p>
                 </div>
 
-                <!-- Additional Links -->
                 <div class="flex flex-wrap justify-center lg:justify-end space-x-6 text-sm">
-                    <a href="/privacy/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Privacy Policy</a>
-                    <a href="/terms/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Terms of Service</a>
-                    <a href="/sitemap/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Sitemap</a>
-                    <a href="/accessibility/" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">Accessibility</a>
+                    <a href="/privacy/" class="text-gray-400 hover:text-sky-300 transition-colors duration-300">Privacy Policy</a>
+                    <a href="/terms/" class="text-gray-400 hover:text-sky-300 transition-colors duration-300">Terms of Service</a>
+                    <a href="/sitemap/" class="text-gray-400 hover:text-sky-300 transition-colors duration-300">Sitemap</a>
+                    <a href="/accessibility/" class="text-gray-400 hover:text-sky-300 transition-colors duration-300">Accessibility</a>
                 </div>
             </div>
 
-            <!-- Accreditation Badges -->
-            <div class="flex justify-center items-center space-x-6 mt-6 pt-6 border-t border-blue-700/30">
+            <div class="flex justify-center items-center space-x-6 mt-6 pt-6 border-t border-sky-700/30">
                 <div class="text-center group">
                     <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-award text-white text-sm"></i>
@@ -554,7 +442,7 @@
                     <span class="text-gray-400 text-xs">ISO 9001:2015</span>
                 </div>
                 <div class="text-center group">
-                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
+                    <div class="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-shield-alt text-white text-sm"></i>
                     </div>
                     <span class="text-gray-400 text-xs">Quality Assured</span>
@@ -563,9 +451,11 @@
         </div>
     </div>
 
-    <!-- Back to Top Button -->
-    <button onclick="scrollToTop()" class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 z-50 border border-cyan-400/30 backdrop-blur-sm">
-        <i class="fas fa-chevron-up text-sm"></i>
+    <button data-scroll-to-top class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-sky-500 to-sky-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 z-50 border border-sky-400/30 backdrop-blur-sm transition-opacity opacity-0 pointer-events-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="11" stroke="white" stroke-width="1.4" opacity="0.35"></circle>
+            <path d="M12 7l-4 5m4-5l4 5m-4-5v10" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
     </button>
 </footer>
 {% endblock %}

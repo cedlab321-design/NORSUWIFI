@@ -14,7 +14,7 @@
         </button>
         
         <div class="flex items-center text-sm text-gray-500 mb-4">
-            <span class="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">NEWS</span>
+            <span class="bg-sky-600 text-white px-2 py-1 rounded text-xs font-medium">NEWS</span>
             <span class="mx-3">•</span>
             <span>{{ news_post.published_date|date:"F d, Y" }}</span>
             <span class="mx-3">•</span>
@@ -29,7 +29,7 @@
         
         <div class="mt-6 pt-6 border-t border-gray-200">
             <a href="{% url 'news:detail' news_post.slug %}" 
-               class="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+               class="inline-flex items-center space-x-2 bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors font-semibold">
                 <span>View Full Article</span>
                 <span>→</span>
             </a>
