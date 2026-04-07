@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Hero -->
-<section class="pt-24 pb-16 bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900 text-white relative overflow-hidden">
+<section class="pt-24 pb-16 bg-gradient-to-br from-sky-900 via-sky-800 to-sky-900 text-white relative overflow-hidden animate-fade-in">
     <div class="absolute inset-0">
         <div class="absolute top-10 left-10 w-72 h-72 bg-sky-600 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
         <div class="absolute bottom-20 right-10 w-72 h-72 bg-sky-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -22,7 +22,7 @@
 </section>
 
 <!-- Department Info -->
-<section class="py-20 bg-white">
+<section class="py-20 bg-white animate-slide-up">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-3 gap-12">
             <div class="lg:col-span-2 space-y-6">
@@ -34,7 +34,8 @@
                     {{ department.description|linebreaks }}
                 </div>
 
-                <div class="mt-6 bg-gradient-to-r from-sky-50 to-sky-50 rounded-2xl p-6 border border-sky-200">
+                <div class="mt-6 bg-gradient-to-r from-sky-50 to-sky-50 rounded-2xl p-6 border border-sky-200 animate-fade-in">
+                    <div class="bg-gradient-to-br from-sky-50 to-sky-50 rounded-2xl p-6 border border-sky-200 animate-fade-in">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Department Leadership</h3>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="flex items-center space-x-3">
@@ -135,7 +136,7 @@
 
         <div class="grid gap-6">
             {% for course in courses %}
-            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-sky-100 overflow-hidden">
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 border border-sky-100 overflow-hidden animate-fade-in group-hover:scale-up" style="animation-delay: {{ forloop.counter|add:1 }}00ms;">
                 <div class="p-6">
                     <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between">
                         <div class="flex-1">
@@ -207,7 +208,7 @@
 </section>
 
 <!-- Stats -->
-<section class="py-16 bg-gradient-to-r from-sky-900 to-sky-800 text-white">
+<div class="p-6 animate-slide-up" style="animation-delay: {{ forloop.counter|add:1 }}00ms;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div class="p-6">
@@ -229,4 +230,52 @@
         </div>
     </div>
 </section>
+
+<style>
+/* Fade in */
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+/* Slide up */
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  opacity: 0;
+  animation: slide-up 0.7s ease-out forwards;
+}
+
+/* Card hover effect */
+.group-hover:scale-up:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
+}
+
+/* Stats counter animation */
+@keyframes count-up {
+  0% { counter-reset: num 0; }
+  100% { counter-reset: num var(--target); }
+}
+
+/* Simple pulse for icons */
+.animate-pulse-slow {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+</style>
+
+
 {% endblock %}

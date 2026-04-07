@@ -116,86 +116,55 @@
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* Brand variables (simple, single-color styles) */
+     <style>
         :root {
-            --brand-primary: #38BDF8; /* Ice Blue */
-            --brand-secondary: #0EA5E9; /* Cool Blue */
-            --brand-accent: #7DD3FC; /* Soft Sky Blue */
-            --brand-bg: #F1F5F9; /* Frost Gray */
-            --brand-text: #1E293B; /* Charcoal Blue */
+            --brand-primary: #38BDF8;
+            --brand-secondary: #0EA5E9;
+            --brand-accent: #7DD3FC;
+            --brand-bg: #F1F5F9;
+            --brand-text: #1E293B;
         }
+
+        /* ===== NAV LINK HOVER + ACTIVE (NEW) ===== */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            color: black;
+        }
+
+        .nav-link:hover {
+            color: #8a0707ff !important;
+        }
+
+        .nav-link.active {
+            color: #8a0707ff !important;
+            font-weight: 600;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #38BDF8;
+            transition: width 0.22s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* ===== KEEP YOUR EXISTING STYLES BELOW ===== */
 
         .glass-effect {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(6px);
             border: 1px solid rgba(0,0,0,0.04);
         }
-        .gradient-bg {
-            /* simplified: single-color background using primary */
-            background-color: var(--brand-primary);
-        }
-        .gradient-text {
-            /* simplified: solid brand color for headings */
-            color: var(--brand-primary) !important;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: unset;
-            background-clip: text;
-        }
-        .text-shadow {
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-        }
-        .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .hover-lift:hover {
-            transform: translateY(-5px);
-        }
-        .hover-glow:hover {
-            text-shadow: 0 0 6px rgba(56, 189, 248, 0.18);
-            transition: text-shadow 0.18s ease;
-        }
-        /* Shared scroll-reveal helper for all pages */
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .reveal-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .reveal-on-scroll {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-        }
-        .animate-stagger > * {
-            opacity: 0;
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-        .animate-stagger > *:nth-child(1) { animation-delay: 0.1s; }
-        .animate-stagger > *:nth-child(2) { animation-delay: 0.2s; }
-        .animate-stagger > *:nth-child(3) { animation-delay: 0.3s; }
-        .animate-stagger > *:nth-child(4) { animation-delay: 0.4s; }
-        .animate-stagger > *:nth-child(5) { animation-delay: 0.5s; }
-        .animate-stagger > *:nth-child(6) { animation-delay: 0.6s; }
-        
-        /* Article content styles */
-        .article-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-        }
-        
-        .article-content.expanded {
-            max-height: 1000px;
-            transition: max-height 0.8s ease-in;
-        }
 
-        /* Navigation Styles */
         .nav-transparent {
             background: transparent !important;
             backdrop-filter: none !important;
@@ -208,26 +177,6 @@
             backdrop-filter: none !important;
             border-bottom: 1px solid rgba(0,0,0,0.06) !important;
             box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06) !important;
-        }
-
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--brand-accent);
-            transition: width 0.22s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
         }
 
         .dropdown-menu {
@@ -256,11 +205,15 @@
                    <img src="/static/images/logo.jpg" alt="NORSU Bayawan Logo" class="w-9 h-9 object-contain object-center mx-auto rounded-full block">
                 </div>
                 <div>
-                    <span class="text-xl font-bold text-black drop-shadow-lg">NORSU Bayawan</span>
+                    <span class="text-xl text-black drop-shadow-lg">
+                        <span class="font-extrabold">NORSU</span> Bayawan
+                    </span>
+
                     <div class="text-xs text-blue-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         Excellence in Education
                     </div>
                 </div>
+
             </a>
             
             <!-- Desktop Menu -->
@@ -401,13 +354,15 @@
                         </div>
                     </div>
                 {% else %}
-                    <!-- Login Button -->
-                    <a href="/accounts/login/" class="bg-black/10 hover:bg-white/20 text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/30 hover:shadow-lg flex items-center space-x-2">
-                        <span>Login</span>
-                        <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-                        </svg>
-                    </a>
+                    <!-- Login & Register Buttons -->
+                    <div class="flex items-center space-x-3">
+                        <a href="/accounts/login/" class="bg-blue-900 hover:bg-blue-800 text-white px-6 py-2.5 rounded-xl font-medium transition-all duration-300 backdrop-blur-sm border border-white/20 hover:border-white/30 hover:shadow-lg flex items-center space-x-2">
+                            <span>Login</span>
+                            <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                            </svg>
+                        </a>
+                    </div>
                 {% endif %}
 
                 <!-- Mobile Menu Button -->
@@ -422,82 +377,37 @@
 </nav>
 
     <script>
-        // Enhanced scroll effect for navbar
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('mainNav');
-            
-            if (window.scrollY > 50) {
-                nav.classList.remove('nav-transparent');
-                nav.classList.add('nav-scrolled');
-            } else {
-                nav.classList.remove('nav-scrolled');
-                nav.classList.add('nav-transparent');
+    // Scroll navbar effect
+    window.addEventListener('scroll', function () {
+        const nav = document.getElementById('mainNav');
+
+        if (window.scrollY > 50) {
+            nav.classList.remove('nav-transparent');
+            nav.classList.add('nav-scrolled');
+        } else {
+            nav.classList.remove('nav-scrolled');
+            nav.classList.add('nav-transparent');
+        }
+    });
+
+    // Active link based on URL
+    document.addEventListener('DOMContentLoaded', function () {
+        const links = document.querySelectorAll('.nav-link');
+        const currentPath = window.location.pathname;
+
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (!href) return;
+
+            if (href === '/' && currentPath === '/') {
+                link.classList.add('active');
+            } 
+            else if (href !== '/' && currentPath.startsWith(href)) {
+                link.classList.add('active');
             }
         });
-
-        // Initialize navigation state
-        document.addEventListener('DOMContentLoaded', function() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.add('nav-transparent');
-        });
-
-        // Mobile menu functionality (you can expand this)
-        document.querySelector('button.lg\\:hidden').addEventListener('click', function() {
-            // Add mobile menu toggle functionality here
-            console.log('Mobile menu clicked');
-        });
-
-        // Lightweight scroll-reveal applied across pages
-        document.addEventListener('DOMContentLoaded', function() {
-            const targets = Array.from(document.querySelectorAll('section, .reveal-on-scroll'));
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
-
-            targets.forEach((el, index) => {
-                if (el.dataset.noReveal === 'true') return;
-                if (!el.classList.contains('reveal-on-scroll')) {
-                    el.classList.add('reveal-on-scroll');
-                }
-                el.style.transitionDelay = `${Math.min(index * 80, 400)}ms`;
-                observer.observe(el);
-            });
-        });
-
-        // Back-to-top helper for shared footer button
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Toggle visibility and wiring for any scroll-to-top buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = Array.from(document.querySelectorAll('[data-scroll-to-top]'));
-            if (!buttons.length) return;
-
-            const toggleButtons = () => {
-                const shouldShow = window.scrollY > 200;
-                buttons.forEach(btn => {
-                    btn.classList.toggle('opacity-0', !shouldShow);
-                    btn.classList.toggle('pointer-events-none', !shouldShow);
-                });
-            };
-
-            buttons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    scrollToTop();
-                });
-            });
-
-            window.addEventListener('scroll', toggleButtons);
-            toggleButtons();
-        });
-    </script>
+    });
+</script>
 
     <!-- Rest of your HTML content remains the same -->
     <main class="pt-20">

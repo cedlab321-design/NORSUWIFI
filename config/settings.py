@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'events',
     'contact',
     'dashboard',
+    'downloads',
 ]
 
 MIDDLEWARE = [

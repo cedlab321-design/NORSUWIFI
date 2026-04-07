@@ -83,14 +83,20 @@
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="flex space-x-4 mt-8 pt-6 border-t border-gray-200">
-                        <button onclick="closePopup()" class="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors font-semibold">
-                            Close Article
+                   <div class="flex space-x-4 mt-8 pt-6 border-t border-gray-200">
+                        <!-- Close Button -->
+                        <button onclick="closePopup()" 
+                             class="bg-sky-600 text-white px-6 py-3 rounded-lg hover:bg-sky-700 transition-colors font-semibold">
+                             Close Article
                         </button>
-                        <button class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
+
+                        <!-- Share Button -->
+                        <button onclick="shareArticle('{{ request.build_absolute_uri }}')" 
+                            class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors font-semibold">
                             Share Article
                         </button>
                     </div>
+
                 </div>
             </div>
             {% empty %}
@@ -250,6 +256,25 @@
     document.getElementById('popupContainer').addEventListener('click', function(e) {
         e.stopPropagation();
     });
+
+    function shareArticle(url) {
+        if (navigator.share) {
+            // Use native Web Share API if available
+            navigator.share({
+                title: document.title,
+                text: "Check out this news article!",
+                url: url
+            })
+            .catch((error) => console.log('Error sharing:', error));
+        } else {
+            // Fallback: copy URL to clipboard
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Article URL copied to clipboard!');
+            }).catch(() => {
+                prompt('Copy the article URL:', url);
+            });
+        }
+    }
 </script>
 
 <!-- Enhanced Footer Section -->
